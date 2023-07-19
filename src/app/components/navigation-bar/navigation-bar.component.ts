@@ -4,6 +4,5 @@ import { Component } from '@angular/core';
   selector: 'app-navigation-bar',
   templateUrl: './navigation-bar.component.html'
 })
-export class NavigationBarComponent {
-  title = 'BuyIt.UI';
+export class NavigationBarComponent{
 }
