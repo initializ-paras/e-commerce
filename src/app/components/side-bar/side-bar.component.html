@@ -1,4 +1,4 @@
-<div class="absolute bg-white w-full h-fit">
+<div class="absolute z-10 bg-white w-[20em] h-full border-r border-b border-neutral-200">
     <div class="flex flex-row justify-between items-center px-2 py-1 shadow-lg border"> <!--Side bar heading-->
         <svg class="h-11 w-24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
             version="1.1" viewBox="0 0 1280 554" xml:space="preserve">
@@ -30,97 +30,77 @@
             </svg>
         </button>
     </div>
-    <div class="flex flex-col justify-start p-4 text-lg text-neutral-800"> <!--Side bar heading-->
-        <ul class="divide-y">
-            <li class="py-2">
-                <h3 class="flex flex-row items-center">
-                    <svg class="fill-neutral-800 h-5 w-5" viewBox="0 0 128 128" version="1.1" xml:space="preserve"
-                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                        stroke-width="0.00128">
+
+    <div class="flex flex-col justify-start py-3 px-2 text-regular text-neutral-800"> <!--Side bar heading-->
+        <ul class="list-outside">
+            <li class="py-2 px-2 transition rounded-xl hover:bg-slate-300 hover:bg-opacity-50">
+                <a class="flex flex-row items-center justify-between" href="#">
+                    <div class="flex flex-row items-center justify-start">
+                        <svg class="fill-neutral-800 h-5 w-5 border border-neutral-800 rounded-xl ml-1"
+                            viewBox="0 0 128 128" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" stroke-width="0.00128">
+                            <path
+                                d="M30,49c0,18.7,15.3,34,34,34s34-15.3,34-34S82.7,15,64,15S30,30.3,30,49z M90,49c0,14.3-11.7,26-26,26S38,63.3,38,49 s11.7-26,26-26S90,34.7,90,49z">
+                            </path>
+                            <path
+                                d="M24.4,119.4C35,108.8,49,103,64,103s29,5.8,39.6,16.4l5.7-5.7C97.2,101.7,81.1,95,64,95s-33.2,6.7-45.3,18.7L24.4,119.4z">
+                            </path>
+                        </svg>
+                        <div class="mx-2">Personal account</div>
+                    </div>
+                    <svg class="fill-neutral-400 h-5 w-5 mr-[-0.25rem]" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg" stroke="#000000" stroke-width="0.00024000000000000003">
                         <path
-                            d="M30,49c0,18.7,15.3,34,34,34s34-15.3,34-34S82.7,15,64,15S30,30.3,30,49z M90,49c0,14.3-11.7,26-26,26S38,63.3,38,49 s11.7-26,26-26S90,34.7,90,49z">
-                        </path>
-                        <path
-                            d="M24.4,119.4C35,108.8,49,103,64,103s29,5.8,39.6,16.4l5.7-5.7C97.2,101.7,81.1,95,64,95s-33.2,6.7-45.3,18.7L24.4,119.4z">
+                            d="M9.71069 18.2929C10.1012 18.6834 10.7344 18.6834 11.1249 18.2929L16.0123 13.4006C16.7927 12.6195 16.7924 11.3537 16.0117 10.5729L11.1213 5.68254C10.7308 5.29202 10.0976 5.29202 9.70708 5.68254C9.31655 6.07307 9.31655 6.70623 9.70708 7.09676L13.8927 11.2824C14.2833 11.6729 14.2833 12.3061 13.8927 12.6966L9.71069 16.8787C9.32016 17.2692 9.32016 17.9023 9.71069 18.2929Z">
                         </path>
                     </svg>
-                    <span class="mx-2">Personal account</span>
-                </h3>
+                </a>
             </li>
-            <li class="py-2">
-                <h3 class="flex flex-row items-center">
-                    <svg class="fill-neutral-800 h-5 w-5" viewBox="0 0 128 128" version="1.1" xml:space="preserve"
-                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                        stroke-width="0.00128">
+            <li class="py-2 px-2 transition rounded-xl hover:bg-slate-300 hover:bg-opacity-50">
+                <a class="flex flex-row items-center justify-between" href="#">
+                    <div class="flex flex-row items-center justify-start">
+                        <svg class="fill-neutral-800 h-5 w-5 border border-neutral-800 rounded-xl ml-1"
+                            viewBox="0 0 128 128" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" stroke-width="0.00128">
+                            <path
+                                d="M30,49c0,18.7,15.3,34,34,34s34-15.3,34-34S82.7,15,64,15S30,30.3,30,49z M90,49c0,14.3-11.7,26-26,26S38,63.3,38,49 s11.7-26,26-26S90,34.7,90,49z">
+                            </path>
+                            <path
+                                d="M24.4,119.4C35,108.8,49,103,64,103s29,5.8,39.6,16.4l5.7-5.7C97.2,101.7,81.1,95,64,95s-33.2,6.7-45.3,18.7L24.4,119.4z">
+                            </path>
+                        </svg>
+                        <div class="mx-2">Personal account</div>
+                    </div>
+                    <svg class="fill-neutral-400 h-5 w-5 mr-[-0.25rem]" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg" stroke="#000000" stroke-width="0.00024000000000000003">
                         <path
-                            d="M30,49c0,18.7,15.3,34,34,34s34-15.3,34-34S82.7,15,64,15S30,30.3,30,49z M90,49c0,14.3-11.7,26-26,26S38,63.3,38,49 s11.7-26,26-26S90,34.7,90,49z">
-                        </path>
-                        <path
-                            d="M24.4,119.4C35,108.8,49,103,64,103s29,5.8,39.6,16.4l5.7-5.7C97.2,101.7,81.1,95,64,95s-33.2,6.7-45.3,18.7L24.4,119.4z">
+                            d="M9.71069 18.2929C10.1012 18.6834 10.7344 18.6834 11.1249 18.2929L16.0123 13.4006C16.7927 12.6195 16.7924 11.3537 16.0117 10.5729L11.1213 5.68254C10.7308 5.29202 10.0976 5.29202 9.70708 5.68254C9.31655 6.07307 9.31655 6.70623 9.70708 7.09676L13.8927 11.2824C14.2833 11.6729 14.2833 12.3061 13.8927 12.6966L9.71069 16.8787C9.32016 17.2692 9.32016 17.9023 9.71069 18.2929Z">
                         </path>
                     </svg>
-                    <span class="mx-2">Personal account</span>
-                </h3>
+                </a>
             </li>
-            <li class="py-2">
-                <h3 class="flex flex-row items-center">
-                    <svg class="fill-neutral-800 h-5 w-5" viewBox="0 0 128 128" version="1.1" xml:space="preserve"
-                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                        stroke-width="0.00128">
+            <li class="py-2 px-2 transition rounded-xl hover:bg-slate-300 hover:bg-opacity-50">
+                <a class="flex flex-row items-center justify-between" href="#">
+                    <div class="flex flex-row items-center justify-start">
+                        <svg class="fill-neutral-800 h-5 w-5 border border-neutral-800 rounded-xl ml-1"
+                            viewBox="0 0 128 128" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" stroke-width="0.00128">
+                            <path
+                                d="M30,49c0,18.7,15.3,34,34,34s34-15.3,34-34S82.7,15,64,15S30,30.3,30,49z M90,49c0,14.3-11.7,26-26,26S38,63.3,38,49 s11.7-26,26-26S90,34.7,90,49z">
+                            </path>
+                            <path
+                                d="M24.4,119.4C35,108.8,49,103,64,103s29,5.8,39.6,16.4l5.7-5.7C97.2,101.7,81.1,95,64,95s-33.2,6.7-45.3,18.7L24.4,119.4z">
+                            </path>
+                        </svg>
+                        <div class="mx-2">Personal account</div>
+                    </div>
+                    <svg class="fill-neutral-400 h-5 w-5 mr-[-0.25rem]" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg" stroke="#000000" stroke-width="0.00024000000000000003">
                         <path
-                            d="M30,49c0,18.7,15.3,34,34,34s34-15.3,34-34S82.7,15,64,15S30,30.3,30,49z M90,49c0,14.3-11.7,26-26,26S38,63.3,38,49 s11.7-26,26-26S90,34.7,90,49z">
-                        </path>
-                        <path
-                            d="M24.4,119.4C35,108.8,49,103,64,103s29,5.8,39.6,16.4l5.7-5.7C97.2,101.7,81.1,95,64,95s-33.2,6.7-45.3,18.7L24.4,119.4z">
-                        </path>
-                    </svg>
-                    <span class="mx-2">Personal account</span>
-                </h3>
-            </li>
-            <li class="py-2">
-                <h3 class="flex flex-row items-center">
-                    <svg class="fill-neutral-800 h-5 w-5" viewBox="0 0 128 128" version="1.1" xml:space="preserve"
-                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                        stroke-width="0.00128">
-                        <path
-                            d="M30,49c0,18.7,15.3,34,34,34s34-15.3,34-34S82.7,15,64,15S30,30.3,30,49z M90,49c0,14.3-11.7,26-26,26S38,63.3,38,49 s11.7-26,26-26S90,34.7,90,49z">
-                        </path>
-                        <path
-                            d="M24.4,119.4C35,108.8,49,103,64,103s29,5.8,39.6,16.4l5.7-5.7C97.2,101.7,81.1,95,64,95s-33.2,6.7-45.3,18.7L24.4,119.4z">
+                            d="M9.71069 18.2929C10.1012 18.6834 10.7344 18.6834 11.1249 18.2929L16.0123 13.4006C16.7927 12.6195 16.7924 11.3537 16.0117 10.5729L11.1213 5.68254C10.7308 5.29202 10.0976 5.29202 9.70708 5.68254C9.31655 6.07307 9.31655 6.70623 9.70708 7.09676L13.8927 11.2824C14.2833 11.6729 14.2833 12.3061 13.8927 12.6966L9.71069 16.8787C9.32016 17.2692 9.32016 17.9023 9.71069 18.2929Z">
                         </path>
                     </svg>
-                    <span class="mx-2">Personal account</span>
-                </h3>
-            </li>
-            <li class="py-2">
-                <h3 class="flex flex-row items-center">
-                    <svg class="fill-neutral-800 h-5 w-5" viewBox="0 0 128 128" version="1.1" xml:space="preserve"
-                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                        stroke-width="0.00128">
-                        <path
-                            d="M30,49c0,18.7,15.3,34,34,34s34-15.3,34-34S82.7,15,64,15S30,30.3,30,49z M90,49c0,14.3-11.7,26-26,26S38,63.3,38,49 s11.7-26,26-26S90,34.7,90,49z">
-                        </path>
-                        <path
-                            d="M24.4,119.4C35,108.8,49,103,64,103s29,5.8,39.6,16.4l5.7-5.7C97.2,101.7,81.1,95,64,95s-33.2,6.7-45.3,18.7L24.4,119.4z">
-                        </path>
-                    </svg>
-                    <span class="mx-2">Personal account</span>
-                </h3>
-            </li>
-            <li class="py-2">
-                <h3 class="flex flex-row items-center">
-                    <svg class="fill-neutral-800 h-5 w-5" viewBox="0 0 128 128" version="1.1" xml:space="preserve"
-                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                        stroke-width="0.00128">
-                        <path
-                            d="M30,49c0,18.7,15.3,34,34,34s34-15.3,34-34S82.7,15,64,15S30,30.3,30,49z M90,49c0,14.3-11.7,26-26,26S38,63.3,38,49 s11.7-26,26-26S90,34.7,90,49z">
-                        </path>
-                        <path
-                            d="M24.4,119.4C35,108.8,49,103,64,103s29,5.8,39.6,16.4l5.7-5.7C97.2,101.7,81.1,95,64,95s-33.2,6.7-45.3,18.7L24.4,119.4z">
-                        </path>
-                    </svg>
-                    <span class="mx-2">Personal account</span>
-                </h3>
+                </a>
             </li>
         </ul>
     </div>
