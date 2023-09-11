@@ -1,16 +1,13 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-search-bar',
   templateUrl: './search-bar.component.html',
   styleUrls: ['./search-bar.component.css']
 })
-export class SearchBarComponent implements OnInit{
+export class SearchBarComponent{
   searchText: string = '';
   showClearButton: boolean = false;
-
-  ngOnInit() {
-  }
 
   clearSearch() {
     this.searchText = '';
