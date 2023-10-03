@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {NavigationBarService} from "./common/services/navigation-bar.service";
 
 @Component({
   selector: 'app-navigation-bar',
@@ -6,4 +7,9 @@ import { Component } from '@angular/core';
 })
 
 export class NavigationBarComponent{
+  constructor(private sharedService: NavigationBarService) {}
+
+  toggleSideBar() {
+    this.sharedService.toggleMenu();
+  }
 }
