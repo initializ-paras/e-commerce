@@ -1,0 +1,7 @@
+<app-basic-accordion [selectedFilters]="selectedFilters" [filterData]="filtersService.filterBrands" [dropdownTitle]="'Brands'"></app-basic-accordion>
+<app-basic-accordion [selectedFilters]="selectedFilters" [filterData]="filtersService.filterCategories" [dropdownTitle]="'Categories'"></app-basic-accordion>
+<app-price-range-accordion
+  [minValue]="filtersService.minimalPrice" [maxValue]="filtersService.maximumPrice"
+  [selectedFilters]="selectedFilters"></app-price-range-accordion>
+<app-specifications-accordion *ngFor="let category of Object.keys(filtersService.filterSpecs)" [selectedFilters]="selectedFilters"
+                              [filterData]="filtersService.filterSpecs[category]" [category]=category></app-specifications-accordion>
