@@ -1,0 +1,7 @@
+<div draggable="false">
+    <div *ngFor="let attribute of Object.keys(filterData)" [id] = attribute>
+        <app-basic-accordion [filterData]="filterData[attribute]" [selectedFilters]="selectedFilters"
+                             [dropdownTitle]="getSuitableHeading(category, attribute)" class="w-full text-base"></app-basic-accordion>
+    </div>
+</div>
+
