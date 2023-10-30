@@ -29,7 +29,6 @@ export class PositiveNumberDirective {
 @Component({
   selector: 'app-price-range-accordion',
   templateUrl: './price-range-accordion.component.html',
-  styleUrls: ['./price-range-accordion.component.css'],
   animations: [accordionAnimation, accordionPriceRangeAnimation]
 })
 
