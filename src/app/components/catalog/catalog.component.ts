@@ -14,6 +14,7 @@ export class CatalogComponent implements OnInit{
   url : string = this.catalogService.baseApiUrl;
   category : string = '';
   totalItemsQuantity! : number;
+  isFiltersModalVisible: boolean = false;
 
   categoryMapping: { [key: string]: string } = {
     'personal_computers': 'personalcomputer',
@@ -61,10 +62,8 @@ export class CatalogComponent implements OnInit{
     this.updateCatalog()
   }
 
-  getFilterOnlyArray() : string[] {
-    let filteredFilters = this.filterService.selectedFilters.filter(
-      filter => !filter.includes('sortingtype'));
-
-    return filteredFilters;
+  toggleFilters() {
+    console.log('Toggle filters method called');
+    this.isFiltersModalVisible = !this.isFiltersModalVisible;
   }
 }

@@ -5,12 +5,14 @@ import {ProductCardComponent} from "./common/components/product-card/product-car
 import {FiltersModule} from "../filters/filters.module";
 import {RouterOutlet} from "@angular/router";
 import { FilterTagComponent } from './common/components/filter-tag/filter-tag.component';
+import { FilterModalComponent } from './common/components/filter-modal/filter-modal.component';
 
 @NgModule({
   declarations: [
     CatalogComponent,
     ProductCardComponent,
     FilterTagComponent,
+    FilterModalComponent,
   ],
   imports: [
     CommonModule,
@@ -18,7 +20,8 @@ import { FilterTagComponent } from './common/components/filter-tag/filter-tag.co
     RouterOutlet,
   ],
   exports: [
-    ProductCardComponent
+    ProductCardComponent,
+    FilterModalComponent
   ]
 })
 
