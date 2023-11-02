@@ -67,4 +67,11 @@ export class FiltersService {
 
     return this.http.get<FiltersData>(this.baseApiUrl + 'specificationfilter/' + category + '?' + query)
   }
+
+  getFilterOnlyArray() : string[] {
+    let filteredFilters = this.selectedFilters.filter(
+      filter => !filter.includes('sortingtype'));
+
+    return filteredFilters;
+  }
 }

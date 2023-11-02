@@ -12,10 +12,10 @@
     <div *ngFor="let item of Object.keys(filterData)" class="flex flex-row items-center justify-between">
       <div>
         <input id="{{this.filterService.apiVariableNameMaps[this.dropdownTitle] + '=' + item}}" type="checkbox" checked
-                *ngIf="selectedFilters.includes(this.filterService.apiVariableNameMaps[this.dropdownTitle] + '=' + item)"
+                *ngIf="this.filterService.selectedFilters.includes(this.filterService.apiVariableNameMaps[this.dropdownTitle] + '=' + item)"
                (change)="selectFilterOption(item, $event)" class="mr-2 relative peer shrink-0 w-3.5 h-3.5"/>
         <input id="{{this.filterService.apiVariableNameMaps[this.dropdownTitle] + '=' + item}}" type="checkbox"
-               *ngIf="!selectedFilters.includes(this.filterService.apiVariableNameMaps[this.dropdownTitle] + '=' + item)"
+               *ngIf="!this.filterService.selectedFilters.includes(this.filterService.apiVariableNameMaps[this.dropdownTitle] + '=' + item)"
                (change)="selectFilterOption(item, $event)" class="mr-2 relative peer shrink-0 w-3.5 h-3.5"/>
         <label class="text-base" for="{{ item }}">{{ item }}</label>
       </div>

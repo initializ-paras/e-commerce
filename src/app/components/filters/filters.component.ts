@@ -15,12 +15,6 @@ export class FiltersComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.filtersService.filterBrands = {};
-    this.filtersService.filterSpecs = {};
-    this.filtersService.filterCategories = {};
-    this.filtersService.selectedFilters = [];
-    this.filtersService.minimalPrice = NaN;
-    this.filtersService.maximumPrice = NaN;
   }
 
   ngOnInit(): void {
