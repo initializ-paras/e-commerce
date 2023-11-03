@@ -10,7 +10,6 @@ import {CatalogComponent} from "../../../../catalog/catalog.component";
 })
 
 export class PositiveNumberDirective {
-
   constructor(private el: ElementRef) { }
 
   @HostListener('input', ['$event']) onInputChange(event: any): void {
@@ -154,4 +153,6 @@ export class PriceRangeAccordionComponent {
 
     console.log(value);
   }
+
+    protected readonly Object = Object;
 }
