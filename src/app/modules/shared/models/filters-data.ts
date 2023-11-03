@@ -5,4 +5,7 @@ export interface FiltersData {
   countedCategories: { [key: string]: number };
   countedAvailability: { [key: string]: number };
   countedSpecifications: { [key: string]: number };
+  totalItemsQuantity: number,
+  currentPageItemsQuantity: number,
+  pageIndex: number
 }
