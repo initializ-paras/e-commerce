@@ -12,6 +12,9 @@ export class FiltersService {
 
   minimalPrice! : number;
   maximumPrice! : number;
+  totalItemsQuantity! : number;
+  currentPageItemsQuantity!: number;
+  pageIndex!: number
   filterSpecs: FilterSpecification = {};
   filterBrands: FilterBaseElement = {};
   filterCategories: FilterBaseElement = {};

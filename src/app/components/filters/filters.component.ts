@@ -33,6 +33,9 @@ export class FiltersComponent implements OnInit, OnDestroy {
         this.filtersService.maximumPrice = (this.filtersService.maximumPrice !== undefined
           && !isNaN(this.filtersService.maximumPrice))
           ? this.filtersService.maximumPrice : value.maxPrice;
+        this.filtersService.totalItemsQuantity = value.totalItemsQuantity;
+        this.filtersService.currentPageItemsQuantity = value.currentPageItemsQuantity;
+        this.filtersService.pageIndex = value.pageIndex;
       },
       error: err => console.log(err)
     });
