@@ -1,4 +1,33 @@
-<main class="flex flex-col my-4 w-fit mx-auto">
+<main *ngIf="totalItemsQuantity === 0" class="flex flex-col my-4 max-w:[82rem]">
+  <app-filter-modal [showModal]="isFiltersModalVisible"
+                    [category]="categoryMapping[category]"
+                    (closeModal)="toggleFilters()"
+                    class="h-full"></app-filter-modal>
+  <div class="flex flex-row justify-between max-md:mx-auto md:ml-[8.6rem] w-fit lg:ml-[8.3rem] xl:ml-[3.5rem] min-[1361px]:ml-[18.6rem]">
+    <div class="flex flex-col select-none justify-start ml-1.5 lg:ml-3.5" draggable="false">
+      <h1 class="font-bold text-2xl">{{category.charAt(0).toUpperCase() + category.slice(1).replaceAll('_', ' ')}}</h1>
+      <h4 style="font-family: 'Open Sans', sans-serif;" class="text-neutral-500">{{totalItemsQuantity}} items</h4>
+    </div>
+  </div>
+  <div class="flex flex-row items-center justify-center md:justify-start md:ml-[8.6rem] lg:hidden">
+    <button (click)="toggleFilters()" class="w-[48%] mt-4 mx-1 rounded-xl select-none py-[0.2rem] sm:py-0.5 md:w-[32%] bg-neutral-300 hover:bg-neutral-800
+     ease-out duration-300 transition text-neutral-800 hover:text-neutral-200 text-sm sm:text-base">Filters</button>
+  </div>
+  <div class="flex flex-row md:ml-[8.6rem] lg:ml-[8.3rem] xl:ml-[3.5rem] min-[1361px]:ml-[18.6rem]">
+    <app-filters *ngIf="totalItemsQuantity > 0" [category]="categoryMapping[category]" class="max-lg:hidden mx-auto w-[15.75rem]" style="font-family: 'Open Sans', sans-serif;"></app-filters>
+    <div>
+      <div *ngIf="filterService.selectedFilters.length > 0" class="max-lg:hidden lg:flex lg:flex-wrap lg:w-[45rem] xl:w-[61rem] min-[1361px]:w-[65.5rem]">
+        <app-filter-tag *ngFor="let filter of this.filterService.getFilterOnlyArray()" [initialFilter]="filter"
+                        [category]="categoryMapping[category]"
+                        class="mt-2 mb-1 mx-1"></app-filter-tag>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="totalItemsQuantity === 0" class="flex flex-row w-fit justify-center items-center mx-auto">
+    <h2>nothing</h2>
+  </div>
+</main>
+<main *ngIf="totalItemsQuantity > 0" class="flex flex-col my-4 w-fit lg:w-[62rem] xl:w-[78rem] min-[1361px]:w-[82rem] mx-auto max-w-[82rem]">
   <app-filter-modal [showModal]="isFiltersModalVisible"
                     [category]="categoryMapping[category]"
                     (closeModal)="toggleFilters()"
@@ -23,7 +52,7 @@
   <div class="flex flex-row items-center justify-between lg:hidden">
     <button (click)="toggleFilters()" class="w-[48%] mt-4 mx-1 rounded-xl select-none py-[0.2rem] sm:py-0.5 md:w-[32%] bg-neutral-300 hover:bg-neutral-800
      ease-out duration-300 transition text-neutral-800 hover:text-neutral-200 text-sm sm:text-base">Filters</button>
-    <div *ngIf="totalItemsQuantity > 0" class="lg:hidden max-xl:mx-1 mx-3.5 items-end w-[48%] md:w-[32%]">
+    <div class="lg:hidden max-xl:mx-1 mx-3.5 items-end w-[48%] md:w-[32%]">
       <h2 class="text-sm ml-1">Sort by</h2>
       <select class="mt-1 p-1 pr-2 border border-gray-300 text-gray-900 text-sm rounded-lg w-full focus:outline-0"
               (change)="toggleSort($event)">
@@ -35,15 +64,15 @@
       </select>
     </div>
   </div>
-  <div class="flex flex-row justify-center">
-    <app-filters [category]="categoryMapping[category]" class="max-lg:hidden mx-auto w-[15.75rem]" style="font-family: 'Open Sans', sans-serif;"></app-filters>
+  <div class="flex flex-row">
+    <app-filters *ngIf="totalItemsQuantity > 0" [category]="categoryMapping[category]" class="max-lg:hidden mx-auto w-[15.75rem]" style="font-family: 'Open Sans', sans-serif;"></app-filters>
     <div>
       <div *ngIf="filterService.selectedFilters.length > 0" class="max-lg:hidden lg:flex lg:flex-wrap lg:w-[45rem] xl:w-[61rem] min-[1361px]:w-[65.5rem]">
         <app-filter-tag *ngFor="let filter of this.filterService.getFilterOnlyArray()" [initialFilter]="filter"
                         [category]="categoryMapping[category]"
                         class="mt-2 mb-1 mx-1"></app-filter-tag>
       </div>
-      <div *ngIf="totalItemsQuantity === 0">
+      <div *ngIf="totalItemsQuantity === 0" class="w-full">
         <h2>nothing</h2>
       </div>
       <div *ngIf="totalItemsQuantity > 0" style="font-family: 'Open Sans', sans-serif;"
