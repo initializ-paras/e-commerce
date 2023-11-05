@@ -14,17 +14,30 @@
      ease-out duration-300 transition text-neutral-800 hover:text-neutral-200 text-sm sm:text-base">Filters</button>
   </div>
   <div class="flex flex-row md:ml-[8.6rem] lg:ml-[8.3rem] xl:ml-[3.5rem] min-[1361px]:ml-[18.6rem]">
-    <app-filters *ngIf="totalItemsQuantity > 0" [category]="categoryMapping[category]" class="max-lg:hidden mx-auto w-[15.75rem]" style="font-family: 'Open Sans', sans-serif;"></app-filters>
-    <div>
-      <div *ngIf="filterService.selectedFilters.length > 0" class="max-lg:hidden lg:flex lg:flex-wrap lg:w-[45rem] xl:w-[61rem] min-[1361px]:w-[65.5rem]">
-        <app-filter-tag *ngFor="let filter of this.filterService.getFilterOnlyArray()" [initialFilter]="filter"
-                        [category]="categoryMapping[category]"
-                        class="mt-2 mb-1 mx-1"></app-filter-tag>
-      </div>
+    <div *ngIf="filterService.selectedFilters.length > 0" class="max-lg:hidden lg:flex lg:flex-wrap lg:w-[45rem] xl:w-[61rem] min-[1361px]:w-[65.5rem]">
+      <app-filter-tag *ngFor="let filter of this.filterService.getFilterOnlyArray()" [initialFilter]="filter"
+                      [category]="categoryMapping[category]"
+                      class="mt-2 mb-1 mx-1"></app-filter-tag>
     </div>
   </div>
-  <div *ngIf="totalItemsQuantity === 0" class="flex flex-row w-fit justify-center items-center mx-auto">
-    <h2>nothing</h2>
+  <div *ngIf="totalItemsQuantity === 0" class="flex flex-col justify-center items-center mx-auto my-5 text-3xl w-fit select-none">
+    <h2 class="font-bold mx-1 my-1">Oops! No products were found using the specified filters!</h2>
+    <h3 class="my-1">Deselect unsuitable filters, choose some other options</h3>
+    <div class="flex flex-row">
+      <h3 class="my-1">to find the very product you are looking for!</h3>
+      <svg class="fill-neutral-800 h-8 w-8 mx-3 my-1" xmlns="http://www.w3.org/2000/svg"
+           viewBox="0 0 512.00 512.00" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC"
+           stroke-width="6.144"></g>
+        <g> <g> <path
+          d="M256,0C114.618,0,0,114.618,0,256s114.618,256,256,256s256-114.618,256-256S397.382,0,256,0z M256,469.333 c-117.818,0-213.333-95.515-213.333-213.333S138.182,42.667,256,42.667S469.333,138.182,469.333,256S373.818,469.333,256,469.333 z"></path>
+          <path
+            d="M341.333,213.333c23.573,0,42.667-19.093,42.667-42.667C384,147.093,364.907,128,341.333,128 c-23.573,0-42.667,19.093-42.667,42.667C298.667,194.24,317.76,213.333,341.333,213.333z"></path>
+          <path
+            d="M384,256c-11.782,0-21.333,9.551-21.333,21.333C362.667,333.434,312.101,384,256,384s-106.667-50.566-106.667-106.667 c0-11.782-9.551-21.333-21.333-21.333c-11.782,0-21.333,9.551-21.333,21.333c0,79.665,69.669,149.333,149.333,149.333 s149.333-69.669,149.333-149.333C405.333,265.551,395.782,256,384,256z"></path>
+          <path
+            d="M149.333,192H192c11.782,0,21.333-9.551,21.333-21.333c0-11.782-9.551-21.333-21.333-21.333h-42.667 c-11.782,0-21.333,9.551-21.333,21.333C128,182.449,137.551,192,149.333,192z"></path> </g> </g></svg>
+    </div>
   </div>
 </main>
 <main *ngIf="totalItemsQuantity > 0" class="flex flex-col my-4 w-fit lg:w-[62rem] xl:w-[78rem] min-[1361px]:w-[82rem] mx-auto max-w-[82rem]">
@@ -71,9 +84,6 @@
         <app-filter-tag *ngFor="let filter of this.filterService.getFilterOnlyArray()" [initialFilter]="filter"
                         [category]="categoryMapping[category]"
                         class="mt-2 mb-1 mx-1"></app-filter-tag>
-      </div>
-      <div *ngIf="totalItemsQuantity === 0" class="w-full">
-        <h2>nothing</h2>
       </div>
       <div *ngIf="totalItemsQuantity > 0" style="font-family: 'Open Sans', sans-serif;"
            class="grid place-items-center grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 justify-start min-[1361px]:w-[65.5rem]">
