@@ -1,7 +1,7 @@
-<div *ngIf="showModal" class="flex justify-center items-center overflow-y-hidden">
-  <div class="bg-black opacity-50 h-full w-full z-40 top-0 left-0 fixed">
+<div *ngIf="showModal" [@fadeInOutBg]="showModal ? 'enter' : 'leave'" class="flex justify-center items-center overflow-y-hidden">
+  <div class="bg-black opacity-50 h-full w-full z-50 top-0 left-0 fixed">
   </div>
-  <div class="max-h-[90%] w-[85%] bg-white rounded-xl z-50 overflow-y-auto p-2 fixed top-12">
+  <div [@fadeInOutWindow]="showModal ? 'enter' : 'leave'" class="max-h-[90%] w-[85%] bg-white rounded-xl z-50 overflow-y-auto p-2 fixed top-12">
     <div class="mt-1 mb-2 flex flex-row justify-between items-center px-2">
       <div>
         <h3 class="text-2xl font-bold">Filters</h3>
@@ -12,13 +12,32 @@
         </svg>
       </button>
     </div>
-    <div *ngIf="filterService.selectedFilters.length > 0" class="flex flex-wrap w-full overflow-y-auto">
-      <app-filter-tag *ngFor="let filter of this.filterService.getFilterOnlyArray()" [initialFilter]="filter"
-                      [category]="category"
-                      class="mt-2 mb-1 mx-1"></app-filter-tag>
-    </div>
+    <div>
+      <div>
+        <div *ngIf="filterService.getFilterOnlyArray().length > 0" class="flex flex-wrap w-full overflow-y-auto">
+          <div class="w-fit h-fit mt-2 mx-1 bg-white border border-neutral-700 rounded-2xl select-none" draggable="false">
+            <div class="mx-3 my-1 flex flex-row items-center">
+              <div class="flex flex-row items-center">
+                <div class="min-[400px]:pb-[0.16rem] min-[400px]:pt-[0.14rem]">
+                  <span class="font-bold mr-1 max-[400px]:text-xs">Cancel all</span>
+                </div>
+              </div>
+              <div class="ml-2 -mr-1" (click)="removeAllFilters()">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                     class="h-5 w-5 transition duration-300 ease-out hover:scale-125">
+                  <path d="M19 5L5 19M5 5L9.5 9.5M12 12L19 19" stroke-width="0.6" stroke="#000000"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <app-filter-tag *ngFor="let filter of this.filterService.getFilterOnlyArray()" [initialFilter]="filter"
+                          [category]="category"
+                          class="mt-2 mb-1 mx-1 max-[400px]:text-xs"></app-filter-tag>
+        </div>
+      </div>
     <div class="overflow-y-auto">
       <app-filters [category]="category" [isMobileVersion]="true" class="mx-auto w-[15.75rem]" style="font-family: 'Open Sans', sans-serif;"></app-filters>
     </div>
   </div>
+</div>
 </div>
