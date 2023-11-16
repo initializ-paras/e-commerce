@@ -3,7 +3,7 @@
                     [category]="categoryMapping[category]"
                     (closeModal)="toggleFilters()"
                     class="h-full"></app-filter-modal>
-  <div class="flex flex-row justify-between max-md:mx-auto md:ml-[8.6rem] w-fit lg:ml-[8.3rem] xl:ml-[3.5rem] min-[1361px]:ml-[18.6rem]">
+  <div class="flex flex-row justify-between max-md:mx-auto md:ml-[8.6rem] w-fit lg:ml-[8.3rem] xl:ml-[3.5rem] min-[1361px]:ml-[18.8rem]">
     <div class="flex flex-col select-none justify-start ml-1.5 lg:ml-3.5" draggable="false">
       <h1 class="font-bold text-2xl">{{category.charAt(0).toUpperCase() + category.slice(1).replaceAll('_', ' ')}}</h1>
       <h4 style="font-family: 'Open Sans', sans-serif;" class="text-neutral-500">{{totalItemsQuantity}} items</h4>
@@ -13,30 +13,28 @@
     <button (click)="toggleFilters()" class="w-[48%] mt-4 mx-1 rounded-xl select-none py-[0.2rem] sm:py-0.5 md:w-[32%] bg-neutral-300 hover:bg-neutral-800
      ease-out duration-300 transition text-neutral-800 hover:text-neutral-200 text-sm sm:text-base">Filters</button>
   </div>
-  <div class="flex flex-row md:ml-[8.6rem] lg:ml-[8.3rem] xl:ml-[3.5rem] min-[1361px]:ml-[18.6rem]">
-    <div *ngIf="filterService.selectedFilters.length > 0" class="max-lg:hidden lg:flex lg:flex-wrap lg:w-[45rem] xl:w-[61rem] min-[1361px]:w-[65.5rem]">
+  <div class="flex flex-row md:ml-[8.6rem] lg:ml-[8.3rem] xl:ml-[3.5rem] min-[1361px]:ml-[18.8rem]">
+    <div *ngIf="filterService.getFilterOnlyArray().length > 0" class="max-lg:hidden lg:flex lg:flex-wrap lg:w-[45rem] xl:w-[61rem] min-[1361px]:w-[65.5rem]">
+      <div class="mt-2 mb-1 mx-1 h-full">
+        <div class="w-fit mx-1 bg-white border border-neutral-700 rounded-2xl select-none" draggable="false">
+          <div class="mx-3 my-1 flex flex-row items-center">
+            <div class="flex flex-row items-center">
+              <div class="pb-[0.16rem] pt-[0.14rem]">
+                <span class="font-bold mr-1">Cancel all</span>
+              </div>
+            </div>
+            <div class="ml-2 -mr-1" (click)="removeAllFilters()">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                   class="h-5 w-5 transition duration-300 ease-out hover:scale-125">
+                <path d="M19 5L5 19M5 5L9.5 9.5M12 12L19 19" stroke-width="0.6" stroke="#000000"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
       <app-filter-tag *ngFor="let filter of this.filterService.getFilterOnlyArray()" [initialFilter]="filter"
                       [category]="categoryMapping[category]"
                       class="mt-2 mb-1 mx-1"></app-filter-tag>
-    </div>
-  </div>
-  <div *ngIf="totalItemsQuantity === 0" class="flex flex-col justify-center items-center mx-auto my-5 text-3xl w-fit select-none">
-    <h2 class="font-bold mx-1 my-1">Oops! No products were found using the specified filters!</h2>
-    <h3 class="my-1">Deselect unsuitable filters, choose some other options</h3>
-    <div class="flex flex-row">
-      <h3 class="my-1">to find the very product you are looking for!</h3>
-      <svg class="fill-neutral-800 h-8 w-8 mx-3 my-1" xmlns="http://www.w3.org/2000/svg"
-           viewBox="0 0 512.00 512.00" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC"
-           stroke-width="6.144"></g>
-        <g> <g> <path
-          d="M256,0C114.618,0,0,114.618,0,256s114.618,256,256,256s256-114.618,256-256S397.382,0,256,0z M256,469.333 c-117.818,0-213.333-95.515-213.333-213.333S138.182,42.667,256,42.667S469.333,138.182,469.333,256S373.818,469.333,256,469.333 z"></path>
-          <path
-            d="M341.333,213.333c23.573,0,42.667-19.093,42.667-42.667C384,147.093,364.907,128,341.333,128 c-23.573,0-42.667,19.093-42.667,42.667C298.667,194.24,317.76,213.333,341.333,213.333z"></path>
-          <path
-            d="M384,256c-11.782,0-21.333,9.551-21.333,21.333C362.667,333.434,312.101,384,256,384s-106.667-50.566-106.667-106.667 c0-11.782-9.551-21.333-21.333-21.333c-11.782,0-21.333,9.551-21.333,21.333c0,79.665,69.669,149.333,149.333,149.333 s149.333-69.669,149.333-149.333C405.333,265.551,395.782,256,384,256z"></path>
-          <path
-            d="M149.333,192H192c11.782,0,21.333-9.551,21.333-21.333c0-11.782-9.551-21.333-21.333-21.333h-42.667 c-11.782,0-21.333,9.551-21.333,21.333C128,182.449,137.551,192,149.333,192z"></path> </g> </g></svg>
     </div>
   </div>
 </main>
@@ -52,7 +50,7 @@
     </div>
     <div *ngIf="totalItemsQuantity > 0" class="max-lg:hidden max-xl:mx-1 mx-3.5 items-end w-60">
       <h2 class="text-sm ml-1">Sort by</h2>
-      <select class="mt-1 p-1 pr-2 border border-gray-300 text-gray-900 text-sm rounded-lg w-full focus:outline-0"
+      <select class="mt-1 p-1 pr-2 border border-gray-300 text-gray-900 text-sm rounded-lg w-full focus:outline-0 accent-neutral-800"
         (change)="toggleSort($event)">
         <option value="rating-desc">Rating</option>
         <option value="price-asc">Price (Ascending)</option>
@@ -67,9 +65,9 @@
      ease-out duration-300 transition text-neutral-800 hover:text-neutral-200 text-sm sm:text-base">Filters</button>
     <div class="lg:hidden max-xl:mx-1 mx-3.5 items-end w-[48%] md:w-[32%]">
       <h2 class="text-sm ml-1">Sort by</h2>
-      <select class="mt-1 p-1 pr-2 border border-gray-300 text-gray-900 text-sm rounded-lg w-full focus:outline-0"
+      <select class="mt-1 p-1 pr-2 border border-gray-300 text-gray-900 text-sm rounded-lg w-full focus:outline-0 accent-neutral-800"
               (change)="toggleSort($event)">
-        <option value="rating-desc">Rating</option>
+        <option class="text-red-600" value="rating-desc">Rating</option>
         <option value="price-asc">Price (Ascending)</option>
         <option value="price-desc">Price (Descending)</option>
         <option value="name-asc">Title (Ascending)</option>
@@ -80,7 +78,24 @@
   <div class="flex flex-row">
     <app-filters *ngIf="totalItemsQuantity > 0" [category]="categoryMapping[category]" class="max-lg:hidden mx-auto w-[15.75rem]" style="font-family: 'Open Sans', sans-serif;"></app-filters>
     <div>
-      <div *ngIf="filterService.selectedFilters.length > 0" class="max-lg:hidden lg:flex lg:flex-wrap lg:w-[45rem] xl:w-[61rem] min-[1361px]:w-[65.5rem]">
+      <div *ngIf="filterService.getFilterOnlyArray().length > 0" class="max-lg:hidden lg:flex lg:flex-wrap lg:w-[45rem] xl:w-[61rem] min-[1361px]:w-[65.5rem]">
+        <div class="mt-2 mb-1 mx-1 h-full">
+          <div class="w-fit mx-1 bg-white border border-neutral-700 rounded-2xl select-none" draggable="false">
+            <div class="mx-3 my-1 flex flex-row items-center">
+              <div class="flex flex-row items-center">
+                <div class="pb-[0.16rem] pt-[0.14rem]">
+                  <span class="font-bold mr-1">Cancel all</span>
+                </div>
+              </div>
+              <div class="ml-2 -mr-1" (click)="removeAllFilters()">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                     class="h-5 w-5 transition duration-300 ease-out hover:scale-125">
+                  <path d="M19 5L5 19M5 5L9.5 9.5M12 12L19 19" stroke-width="0.6" stroke="#000000"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
         <app-filter-tag *ngFor="let filter of this.filterService.getFilterOnlyArray()" [initialFilter]="filter"
                         [category]="categoryMapping[category]"
                         class="mt-2 mb-1 mx-1"></app-filter-tag>

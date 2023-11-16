@@ -16,20 +16,14 @@ export class FiltersComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (!this.isMobileVersion) {
-      this.filtersService.selectedFilters = [];
-      this.eraseServiceData();
-    }
+    // if (!this.isMobileVersion) {
+    //   this.filtersService.selectedFilters = [];
+    //   this.eraseServiceData();
+    // }
   }
 
   ngOnInit(): void {
     this.updateFilters();
-  }
-
-  eraseServiceData() : void {
-    this.filtersService.filterSpecs = {};
-    this.filtersService.filterBrands = {};
-    this.filtersService.filterCategories = {};
   }
 
   updateFilters(category : string = this.category): void {

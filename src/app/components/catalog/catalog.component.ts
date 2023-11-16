@@ -3,6 +3,7 @@ import {CatalogService} from "./catalog.service";
 import {GeneralizedProduct} from "../../modules/shared/models/generalized-product";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FiltersService} from "../filters/filters.service";
+import {FiltersComponent} from "../filters/filters.component";
 
 @Component({
   selector: 'app-catalog',
@@ -63,7 +64,13 @@ export class CatalogComponent implements OnInit{
   }
 
   toggleFilters() {
-    console.log('Toggle filters method called');
     this.isFiltersModalVisible = !this.isFiltersModalVisible;
+  }
+
+  removeAllFilters() {
+    this.filterService.clearSelectedFilters();
+    this.updateCatalog();
+    let filters : FiltersComponent = new FiltersComponent(this.filterService);
+    filters.updateFilters(this.categoryMapping[this.category]);
   }
 }

@@ -10,7 +10,6 @@ import {FiltersService} from "../../../filters.service";
 
 export class SpecificationsAccordionComponent {
   @Input() filterData: {[p: string]: {[p: string]: number}} = {};
-  @Input() selectedFilters: string[] = [];
   @Input() category: string = '';
 
   constructor(public filterService : FiltersService) {

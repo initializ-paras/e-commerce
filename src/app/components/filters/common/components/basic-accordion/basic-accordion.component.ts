@@ -14,7 +14,6 @@ import {CatalogComponent} from "../../../../catalog/catalog.component";
 export class BasicAccordionComponent {
   @Input() filterData: FilterBaseElement = {};
   @Input() dropdownTitle: string = '';
-  @Input() selectedFilters: string[] = [];
   @Input() isOpen: boolean = true;
 
   constructor(public filterService: FiltersService, public filterComponent : FiltersComponent,
@@ -28,18 +27,27 @@ export class BasicAccordionComponent {
     const filterString = `${filterKey}=${value}`;
 
     if (event.target.checked) {
-      this.selectedFilters.push(filterString);
+      this.filterService.selectedFilters.push(filterString);
     } else {
-      const index = this.selectedFilters.findIndex(filter => filter.includes(filterString));
+      const index = this.filterService.selectedFilters.findIndex(filter => filter.includes(filterString));
       if (index !== -1) {
-        this.selectedFilters.splice(index, 1);
+        this.filterService.selectedFilters.splice(index, 1);
       }
     }
 
-    this.filterService.selectedFilters = this.selectedFilters;
-
     this.filterComponent.updateFilters();
     this.catalogComponent.updateCatalog();
+  }
+
+  isPresentInFilterList(item: string) : boolean {
+    let value = item;
+    const filterKey = this.filterService.apiVariableNameMaps[this.dropdownTitle];
+
+    const filterString = `${filterKey}=${value}`;
+
+    const index = this.filterService.selectedFilters.findIndex(filter => filter.includes(filterString));
+
+    return index !== -1;
   }
 
   toggleDropdown() {

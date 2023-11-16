@@ -77,4 +77,8 @@ export class FiltersService {
 
     return filteredFilters;
   }
+
+  clearSelectedFilters(): void {
+    this.selectedFilters = [];
+  }
 }
