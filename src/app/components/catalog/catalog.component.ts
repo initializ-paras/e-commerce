@@ -49,20 +49,6 @@ export class CatalogComponent implements OnInit{
     });
   }
 
-  toggleSort($event : any) {
-    if (this.filterService.selectedFilters.some(filter => filter.includes('sortingtype'))) {
-      let replacedIndex = this.filterService.selectedFilters.findIndex(
-        item => item.includes("sortingtype"));
-
-      this.filterService.selectedFilters[replacedIndex] = 'sortingtype=' + $event.target.value;
-    }
-    else {
-      this.filterService.selectedFilters.push('sortingtype=' + $event.target.value);
-    }
-
-    this.updateCatalog()
-  }
-
   toggleFilters() {
     this.isFiltersModalVisible = !this.isFiltersModalVisible;
   }
