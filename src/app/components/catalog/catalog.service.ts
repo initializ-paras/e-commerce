@@ -4,10 +4,7 @@ import {Pagination} from "../../modules/shared/models/pagination";
 import {GeneralizedProduct} from "../../modules/shared/models/generalized-product";
 import {FiltersService} from "../filters/filters.service";
 
-@Injectable({
-  providedIn: 'root'
-})
-
+@Injectable()
 export class CatalogService {
   baseApiUrl : string = "https://localhost:7001/api/"
 

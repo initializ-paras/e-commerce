@@ -4,9 +4,7 @@ import {FiltersData} from "../../modules/shared/models/filters-data";
 import {FilterSpecification} from "./common/models/filter-specification";
 import {FilterBaseElement} from "./common/models/filter-base-element";
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class FiltersService {
   baseApiUrl : string = "https://localhost:7001/api/";
 

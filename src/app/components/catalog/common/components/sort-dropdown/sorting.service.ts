@@ -1,10 +1,20 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import { FiltersService } from "../../../../filters/filters.service";
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
+export class SortingService implements OnDestroy {
+  constructor(
+    private filtersService: FiltersService,
+    private router: Router
+  ) {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.selectedOption = "Rating";
+      }
+    });
+  }
 
-export class SortingService {
   sortingOptions: { [key: string]: string } = {
     'Rating': 'rating-desc',
     'Price (Ascending)': 'price-asc',
@@ -13,5 +23,14 @@ export class SortingService {
     'Title (Descending)': 'name-desc'
   };
 
-  selectedOption: string = "Rating"
+  selectedOption: string = "Rating";
+
+  ngOnDestroy(): void {
+    if (this.filtersService.selectedFilters.some(filter => filter.includes('sortingtype'))) {
+      let replacedIndex = this.filtersService.selectedFilters.findIndex(
+        item => item.includes("sortingtype"));
+
+      this.filtersService.selectedFilters.splice(replacedIndex, 1);
+    }
+  }
 }
