@@ -17,7 +17,7 @@
         <input id="{{this.filterService.apiVariableNameMaps[this.dropdownTitle] + '=' + item}}" type="checkbox"
                *ngIf="!this.filterService.selectedFilters.includes(this.filterService.apiVariableNameMaps[this.dropdownTitle] + '=' + item)"
                (change)="selectFilterOption(item, $event)" class="mr-2 relative peer shrink-0 w-3.5 h-3.5"/>
-        <label class="text-base" for="{{ item }}">{{ item }}</label>
+        <label class="text-base">{{ item }}</label>
       </div>
       <div class="flex justify-end text-neutral-400 ml-2">
         <span *ngIf="!isPresentInFilterList(item)">{{ filterData[item] }}</span>
