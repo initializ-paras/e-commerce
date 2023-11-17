@@ -35,7 +35,7 @@
                           class="mt-2 mb-1 mx-1 max-[400px]:text-xs"></app-filter-tag>
         </div>
       </div>
-    <div class="overflow-y-auto">
+    <div *ngIf="catalogComponent.items.length > 0" class="overflow-y-auto">
       <app-filters [category]="category" [isMobileVersion]="true" class="mx-auto w-[15.75rem]" style="font-family: 'Open Sans', sans-serif;"></app-filters>
     </div>
   </div>

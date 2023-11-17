@@ -18,7 +18,7 @@ export class FilterModalComponent {
   @Input() category: string = '';
   @Output() closeModal: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor(public filterService : FiltersService, private catalogComponent : CatalogComponent) {
+  constructor(public filterService : FiltersService, public catalogComponent : CatalogComponent) {
   }
 
   onCloseModal() {
