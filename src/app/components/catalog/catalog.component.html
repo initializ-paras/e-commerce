@@ -10,7 +10,7 @@
     </div>
   </div>
   <div class="flex flex-row items-center justify-center md:justify-start md:ml-[8.6rem] lg:hidden">
-    <button (click)="toggleFilters()" class="w-[48%] mt-4 mx-1 rounded-xl select-none py-[0.2rem] sm:py-0.5 md:w-[32%] bg-neutral-300 hover:bg-neutral-800
+    <button (click)="toggleFilters()" class="w-fit mt-4 mx-1 rounded-xl select-none py-[0.2rem] sm:py-0.5 md:w-[32%] bg-neutral-300 hover:bg-neutral-800
      ease-out duration-300 transition text-neutral-800 hover:text-neutral-200 text-sm sm:text-base">Filters</button>
   </div>
   <div class="flex flex-row md:ml-[8.6rem] lg:ml-[8.3rem] xl:ml-[3.5rem] min-[1361px]:ml-[18.8rem]">
@@ -37,6 +37,12 @@
                       class="mt-2 mb-1 mx-1"></app-filter-tag>
     </div>
   </div>
+  <div class="flex justify-center items-center whitespace-normal max-sm:max-w-[9rem] md:max-w-[40rem] lg:max-w-[62rem] xl:max-w-[78rem]
+   min-[1361px]:max-w-[82rem] md:mx-[9rem] lg:mx-[9rem] xl:mx-[4rem] min-[1361px]:mx-[19.5rem] break-all">
+    <div class="max-w-full overflow-hidden">
+      gugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugugu
+    </div>
+  </div>
 </main>
 <main *ngIf="totalItemsQuantity > 0" class="flex flex-col my-4 w-fit lg:w-[62rem] xl:w-[78rem] min-[1361px]:w-[82rem] mx-auto max-w-[82rem]">
   <app-filter-modal [showModal]="isFiltersModalVisible"
@@ -48,32 +54,14 @@
       <h1 class="font-bold text-2xl">{{category.charAt(0).toUpperCase() + category.slice(1).replaceAll('_', ' ')}}</h1>
       <h4 style="font-family: 'Open Sans', sans-serif;" class="text-neutral-500">{{totalItemsQuantity}} items</h4>
     </div>
-    <div *ngIf="totalItemsQuantity > 0" class="max-lg:hidden max-xl:mx-1 mx-3.5 items-end w-60">
-      <h2 class="text-sm ml-1">Sort by</h2>
-      <select class="mt-1 p-1 pr-2 border border-gray-300 text-gray-900 text-sm rounded-lg w-full focus:outline-0 accent-neutral-800"
-        (change)="toggleSort($event)">
-        <option value="rating-desc">Rating</option>
-        <option value="price-asc">Price (Ascending)</option>
-        <option value="price-desc">Price (Descending)</option>
-        <option value="name-asc">Title (Ascending)</option>
-        <option value="name-desc">Title (Descending)</option>
-      </select>
+    <div *ngIf="totalItemsQuantity > 0" class="max-lg:hidden lg:mr-2 xl:mx-2 min-[1361px]:mx-3.5 items-end w-60">
+      <app-sort-dropdown></app-sort-dropdown>
     </div>
   </div>
   <div class="flex flex-row items-center justify-between lg:hidden">
     <button (click)="toggleFilters()" class="w-[48%] mt-4 mx-1 rounded-xl select-none py-[0.2rem] sm:py-0.5 md:w-[32%] bg-neutral-300 hover:bg-neutral-800
      ease-out duration-300 transition text-neutral-800 hover:text-neutral-200 text-sm sm:text-base">Filters</button>
-    <div class="lg:hidden max-xl:mx-1 mx-3.5 items-end w-[48%] md:w-[32%]">
-      <h2 class="text-sm ml-1">Sort by</h2>
-      <select class="mt-1 p-1 pr-2 border border-gray-300 text-gray-900 text-sm rounded-lg w-full focus:outline-0 accent-neutral-800"
-              (change)="toggleSort($event)">
-        <option class="text-red-600" value="rating-desc">Rating</option>
-        <option value="price-asc">Price (Ascending)</option>
-        <option value="price-desc">Price (Descending)</option>
-        <option value="name-asc">Title (Ascending)</option>
-        <option value="name-desc">Title (Descending)</option>
-      </select>
-    </div>
+    <app-sort-dropdown class="lg:hidden min-[50px]:mr-1 sm:mx-[0.55rem] md:mx-[0.55rem] items-end w-[49%] md:w-[32%]"></app-sort-dropdown>
   </div>
   <div class="flex flex-row">
     <app-filters *ngIf="totalItemsQuantity > 0" [category]="categoryMapping[category]" class="max-lg:hidden mx-auto w-[15.75rem]" style="font-family: 'Open Sans', sans-serif;"></app-filters>

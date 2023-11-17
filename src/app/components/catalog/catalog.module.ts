@@ -6,6 +6,7 @@ import {FiltersModule} from "../filters/filters.module";
 import {RouterOutlet} from "@angular/router";
 import { FilterTagComponent } from './common/components/filter-tag/filter-tag.component';
 import { FilterModalComponent } from './common/components/filter-modal/filter-modal.component';
+import { SortDropdownComponent } from './common/components/sort-dropdown/sort-dropdown.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { FilterModalComponent } from './common/components/filter-modal/filter-mo
     ProductCardComponent,
     FilterTagComponent,
     FilterModalComponent,
+    SortDropdownComponent,
   ],
   imports: [
     CommonModule,
