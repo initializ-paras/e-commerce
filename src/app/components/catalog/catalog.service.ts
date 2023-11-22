@@ -10,9 +10,9 @@ export class CatalogService {
 
   constructor(public filtersService : FiltersService, private http : HttpClient) { }
 
-  getPaginatedCatalog(categoty : string) {
+  getPaginatedCatalog(categoty : string, pageIndex : number) {
     let query = this.filtersService.selectedFilters.join('&').replaceAll('+', '%2B')
 
-    return this.http.get<Pagination<GeneralizedProduct[]>>(this.baseApiUrl + categoty + '?' + query);
+    return this.http.get<Pagination<GeneralizedProduct[]>>(this.baseApiUrl + categoty + '?' + 'pageindex=' + pageIndex + '&' + query);
   }
 }

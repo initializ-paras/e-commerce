@@ -92,6 +92,13 @@
            class="grid place-items-center grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 justify-start min-[1361px]:w-[65.5rem]">
         <app-product-card *ngFor="let product of items" [product]="product" [url]="url"></app-product-card>
       </div>
+      <div *ngIf="totalItemsQuantity > itemsPerPage" class="flex flex-row justify-center mt-4">
+        <pagination style="font-family: 'Open Sans', sans-serif;" [boundaryLinks]="true" [totalItems]="totalItemsQuantity"
+                    [maxSize]="maxPaginationNavigationLinks" [itemsPerPage]="itemsPerPage"
+                    previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"
+                    (pageChanged)="changePageIndex($event)">
+        </pagination>
+      </div>
     </div>
   </div>
 </main>

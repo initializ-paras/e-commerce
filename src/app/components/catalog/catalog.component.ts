@@ -7,14 +7,18 @@ import {FiltersComponent} from "../filters/filters.component";
 
 @Component({
   selector: 'app-catalog',
-  templateUrl: './catalog.component.html',
+  templateUrl: './catalog.component.html'
 })
 
 export class CatalogComponent implements OnInit{
   items : GeneralizedProduct[] = [];
   url : string = this.catalogService.baseApiUrl;
   category : string = '';
-  totalItemsQuantity! : number;
+  totalItemsQuantity!: number;
+  itemsPerPage: number = 24;
+  maxPaginationNavigationLinks: number = 10;
+  currentPageIndex: number = 1;
+
   isFiltersModalVisible: boolean = false;
 
   categoryMapping: { [key: string]: string } = {
@@ -29,14 +33,15 @@ export class CatalogComponent implements OnInit{
     this.updateCatalog();
   }
 
-  updateCatalog() {
+  updateCatalog(): void {
     this.route.params.subscribe(params => {
       this.category = params['category'];
       const apiCategory = this.categoryMapping[this.category] || this.category;
-      this.catalogService.getPaginatedCatalog(apiCategory).subscribe({
+      this.catalogService.getPaginatedCatalog(apiCategory, this.currentPageIndex).subscribe({
         next: response => {
           this.items = response.items;
           this.totalItemsQuantity = response.totalItemsQuantity;
+          this.currentPageIndex = response.pageIndex;
         },
         error: err => {
           if (err.status === 404) {
@@ -49,14 +54,21 @@ export class CatalogComponent implements OnInit{
     });
   }
 
-  toggleFilters() {
+  toggleFilters(): void {
     this.isFiltersModalVisible = !this.isFiltersModalVisible;
   }
 
-  removeAllFilters() {
+  removeAllFilters(): void {
     this.filterService.clearSelectedFilters();
     this.updateCatalog();
     let filters : FiltersComponent = new FiltersComponent(this.filterService);
     filters.updateFilters(this.categoryMapping[this.category]);
+  }
+
+  changePageIndex(event : any): void {
+    if(this.currentPageIndex !== event.page) {
+      this.currentPageIndex = event.page;
+      this.updateCatalog();
+    }
   }
 }

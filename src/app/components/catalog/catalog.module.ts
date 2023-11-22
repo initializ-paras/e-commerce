@@ -10,6 +10,7 @@ import { SortDropdownComponent } from './common/components/sort-dropdown/sort-dr
 import {FiltersService} from "../filters/filters.service";
 import {SortingService} from "./common/components/sort-dropdown/sorting.service";
 import {CatalogService} from "./catalog.service";
+import {PaginationModule} from "ngx-bootstrap/pagination";
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import {CatalogService} from "./catalog.service";
     CommonModule,
     FiltersModule,
     RouterOutlet,
+    PaginationModule,
   ],
   providers: [
     FiltersService,
