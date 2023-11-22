@@ -1,0 +1,23 @@
+::ng-deep .page-item.active .page-link {
+  background-color: #737373;
+  border-color: #737373;
+}
+
+::ng-deep .page-link:focus {
+  box-shadow: none;
+  color: #737373;
+}
+
+::ng-deep .page-link {
+  color: #737373;
+}
+
+::ng-deep .page-link:hover {
+  color: #737373;
+}
+
+::ng-deep .page-item.active .page-link:hover {
+  background-color: #737373;
+  border-color: #737373;
+  color:white;
+}
