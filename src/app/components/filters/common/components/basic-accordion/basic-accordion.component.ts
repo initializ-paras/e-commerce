@@ -35,6 +35,8 @@ export class BasicAccordionComponent {
       }
     }
 
+    this.catalogComponent.currentPageIndex = 1;
+
     this.filterComponent.updateFilters();
     this.catalogComponent.updateCatalog();
   }
