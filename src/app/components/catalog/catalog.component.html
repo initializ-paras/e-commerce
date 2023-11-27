@@ -54,9 +54,6 @@
       <h1 class="font-bold text-2xl">{{category.charAt(0).toUpperCase() + category.slice(1).replaceAll('_', ' ')}}</h1>
       <h4 style="font-family: 'Open Sans', sans-serif;" class="text-neutral-500">{{totalItemsQuantity}} items</h4>
     </div>
-<!--    <div *ngIf="totalItemsQuantity > 0" class="max-lg:hidden lg:mr-2 xl:mx-2 min-[1361px]:mx-3.5 items-end w-60">-->
-<!--      <app-sort-dropdown ></app-sort-dropdown>-->
-<!--    </div>-->
     <app-sort-dropdown class="max-lg:hidden lg:mr-2 xl:mx-2 min-[1361px]:mx-3.5 items-end w-60"></app-sort-dropdown>
   </div>
   <div class="flex flex-row items-center justify-between lg:hidden">

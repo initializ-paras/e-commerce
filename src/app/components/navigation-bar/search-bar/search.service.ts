@@ -9,6 +9,7 @@ import {Product} from "../../../modules/shared/models/product";
 
 export class SearchService {
   baseApiUrl : string = "https://localhost:7001/api/"
+  searchedText : string = '';
 
   constructor(private http : HttpClient) { }
 
