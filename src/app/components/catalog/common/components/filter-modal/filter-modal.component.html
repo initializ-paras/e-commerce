@@ -14,7 +14,7 @@
     </div>
     <div>
       <div>
-        <div *ngIf="filterService.getFilterOnlyArray().length > 0" class="flex flex-wrap w-full overflow-y-auto">
+        <div *ngIf="this.filterService.getFilterOnlyArray().length > 0" class="flex flex-wrap w-full overflow-y-auto">
           <div class="w-fit h-fit mt-2 mx-1 bg-white border border-neutral-700 rounded-2xl select-none" draggable="false">
             <div class="mx-3 my-1 flex flex-row items-center">
               <div class="flex flex-row items-center">
@@ -36,7 +36,7 @@
         </div>
       </div>
     <div *ngIf="catalogComponent.items.length > 0" class="overflow-y-auto">
-      <app-filters [category]="category" [isMobileVersion]="true" class="mx-auto w-[15.75rem]" style="font-family: 'Open Sans', sans-serif;"></app-filters>
+      <app-filters [category]="category" class="mx-auto w-[15.75rem]" style="font-family: 'Open Sans', sans-serif;"></app-filters>
     </div>
   </div>
 </div>

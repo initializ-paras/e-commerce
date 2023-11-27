@@ -6,6 +6,7 @@ import {
   filterModalBackgroundAnimation,
   filterModalWindowAnimation
 } from "./filter-modal.animations";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-filter-modal',
@@ -18,7 +19,8 @@ export class FilterModalComponent {
   @Input() category: string = '';
   @Output() closeModal: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor(public filterService : FiltersService, public catalogComponent : CatalogComponent) {
+  constructor(public filterService : FiltersService, public catalogComponent : CatalogComponent,
+              private route: ActivatedRoute) {
   }
 
   onCloseModal() {
@@ -30,7 +32,7 @@ export class FilterModalComponent {
 
     this.catalogComponent.updateCatalog();
 
-    let filters : FiltersComponent = new FiltersComponent(this.filterService);
+    let filters : FiltersComponent = new FiltersComponent(this.filterService, this.route);
 
     filters.updateFilters(this.category);
   }

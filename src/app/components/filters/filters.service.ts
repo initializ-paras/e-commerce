@@ -3,13 +3,14 @@ import {HttpClient} from "@angular/common/http";
 import {FiltersData} from "../../modules/shared/models/filters-data";
 import {FilterSpecification} from "./common/models/filter-specification";
 import {FilterBaseElement} from "./common/models/filter-base-element";
+import {SearchService} from "../navigation-bar/search-bar/search.service";
 
 @Injectable()
 export class FiltersService {
-  baseApiUrl : string = "https://localhost:7001/api/";
-
-  minimalPrice! : number;
-  maximumPrice! : number;
+  baseApiUrl: string = "https://localhost:7001/api/";
+  filterCategory!: string | null;
+  minimalPrice!: number;
+  maximumPrice!: number;
   totalItemsQuantity! : number;
   currentPageItemsQuantity!: number;
   pageIndex!: number
@@ -18,7 +19,7 @@ export class FiltersService {
   filterCategories: FilterBaseElement = {};
   selectedFilters: string[] = [];
 
-  apiVariableNameMaps : { [key: string]: string } = {
+  apiVariableNameMaps: { [key: string]: string } = {
     'Brands' : 'brandname',
     'Categories' : 'category',
     'Availability' : 'instock',
@@ -57,16 +58,21 @@ export class FiltersService {
     'storage_type': 'Storage type',
   };
 
-  constructor(private http : HttpClient) { }
+  categoryMapping: { [key: string]: string } = {
+    'personal_computers': 'personalcomputer',
+    'search_results': 'productsearch'
+  };
+
+  constructor(private http : HttpClient, private searchService: SearchService) { }
 
   getRelatedFilters(category : string) {
     let query = this.selectedFilters.join('&').replaceAll('+', '%2B');
+    let preparedText: string = 'text=' + this.searchService.searchedText;
 
-    if (query.length === 0) {
-      return this.http.get<FiltersData>(this.baseApiUrl + 'specificationfilter/' + category + '?')
-    }
+    let gatheredAttributes: string[] = [query, preparedText];
 
-    return this.http.get<FiltersData>(this.baseApiUrl + 'specificationfilter/' + category + '?' + query)
+    return this.http.get<FiltersData>(
+      this.baseApiUrl + 'specificationfilter/' + category + '?' + gatheredAttributes.join('&'))
   }
 
   getFilterOnlyArray() : string[] {

@@ -34,7 +34,6 @@ export class PositiveNumberDirective {
 export class PriceRangeAccordionComponent {
   @Input() maxValue!: number;
   @Input() minValue!: number;
-  @Input() selectedFilters: string[] = [];
   @Input() isOpen: boolean = true;
 
   buttonDisabled = false;
@@ -69,16 +68,12 @@ export class PriceRangeAccordionComponent {
 
     this.checkPriceRangeValidity(lowerValue, upperValue);
 
-    console.log('valid - ' + this.dataIsValid)
-
     if (!this.dataIsValid) {
       this.dataIsValid = true;
       return;
     }
 
     this.addPriceRangeToSelectedFilters(lowerValue, upperValue);
-
-    this.filterService.selectedFilters = this.selectedFilters;
 
     this.filterComponent.updateFilters();
     this.catalogComponent.updateCatalog();
@@ -141,17 +136,17 @@ export class PriceRangeAccordionComponent {
   addPriceRangeToSelectedFilters(lowerValue: number, upperValue: number) {
     const templateValue: string = 'lowerpricelimit=/&upperpricelimit=*';
 
-    let value: string = templateValue.replace('/', lowerValue.toString()).replace('*', upperValue.toString());
+    let value: string = templateValue.replace(
+      '/', lowerValue.toString()).replace('*', upperValue.toString());
 
-    const existingIndex = this.selectedFilters.findIndex(filter => filter.includes('lowerpricelimit=') && filter.includes('upperpricelimit='));
+    const existingIndex = this.filterService.selectedFilters.findIndex(
+      filter => filter.includes('lowerpricelimit=') && filter.includes('upperpricelimit='));
 
     if (existingIndex !== -1) {
-      this.selectedFilters[existingIndex] = value;
+      this.filterService.selectedFilters[existingIndex] = value;
     } else {
-      this.selectedFilters.push(value);
+      this.filterService.selectedFilters.push(value);
     }
-
-    console.log(value);
   }
 
     protected readonly Object = Object;

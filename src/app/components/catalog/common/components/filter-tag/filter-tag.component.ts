@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FiltersService} from "../../../../filters/filters.service";
 import {CatalogComponent} from "../../../catalog.component";
 import {FiltersComponent} from "../../../../filters/filters.component";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-filter-tag',
@@ -14,10 +15,13 @@ export class FilterTagComponent implements OnInit {
   processedFilter! : string;
   tagTitle! : string | undefined;
 
-  constructor(public filterService : FiltersService, public catalogComponent : CatalogComponent) {
+  constructor(public filterService : FiltersService, public catalogComponent : CatalogComponent,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit() {
+    console.log(this.initialFilter);
+
     let isPriceFilter : boolean = this.initialFilter.includes("lowerpricelimit");
 
     if (isPriceFilter) {
@@ -36,8 +40,6 @@ export class FilterTagComponent implements OnInit {
     if (this.tagTitle == 'Brands') {
       this.tagTitle = 'Brand';
     }
-
-    console.log(this.tagTitle)
   }
 
   private extractNumbers(inputString: string): number[] {
@@ -63,7 +65,7 @@ export class FilterTagComponent implements OnInit {
       this.filterService.selectedFilters.splice(index, 1);
     }
 
-    let filters : FiltersComponent = new FiltersComponent(this.filterService);
+    let filters : FiltersComponent = new FiltersComponent(this.filterService, this.route);
 
     filters.updateFilters(this.category);
 

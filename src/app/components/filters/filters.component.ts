@@ -1,42 +1,43 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FiltersService} from "./filters.service";
 import {FilterSpecification} from "./common/models/filter-specification";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-filters',
   templateUrl: './filters.component.html'
 })
-export class FiltersComponent implements OnInit, OnDestroy {
+export class FiltersComponent implements OnInit {
   @Input() category! : string;
-  @Input() isMobileVersion : boolean = false;
-  selectedFilters : string[] = [];
   protected readonly Object = Object;
 
-  constructor(public filtersService : FiltersService) {
-  }
-
-  ngOnDestroy(): void {
-    if (!this.isMobileVersion) {
-      this.filtersService.selectedFilters = [];
-    }
+  constructor(public filtersService : FiltersService, private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
     this.updateFilters();
   }
 
+  private checkAndClearFilters(category: string): void {
+    console.log(category)
+    if (category && category !== this.filtersService.filterCategory) {
+      this.filtersService.selectedFilters = [];
+      this.filtersService.filterCategory = category;
+    }
+  }
+
   updateFilters(category : string = this.category): void {
+    this.route.paramMap.subscribe( paramMap => {
+      let extractedCategory: string = paramMap.get('category')!;
+      this.checkAndClearFilters(extractedCategory);
+    })
     this.filtersService.getRelatedFilters(category).subscribe({
       next: value => {
         this.filtersService.filterSpecs = this.processSpecifications(value.countedSpecifications);
         this.filtersService.filterBrands = value.countedBrands;
         this.filtersService.filterCategories = value.countedCategories;
-        this.filtersService.minimalPrice = (this.filtersService.minimalPrice !== undefined
-          && !isNaN(this.filtersService.minimalPrice))
-          ? this.filtersService.minimalPrice : value.minPrice;
-        this.filtersService.maximumPrice = (this.filtersService.maximumPrice !== undefined
-          && !isNaN(this.filtersService.maximumPrice))
-          ? this.filtersService.maximumPrice : value.maxPrice;
+        this.filtersService.minimalPrice = value.minPrice;
+        this.filtersService.maximumPrice = value.maxPrice;
         this.filtersService.totalItemsQuantity = value.totalItemsQuantity;
         this.filtersService.currentPageItemsQuantity = value.currentPageItemsQuantity;
         this.filtersService.pageIndex = value.pageIndex;
