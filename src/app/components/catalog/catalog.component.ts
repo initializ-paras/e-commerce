@@ -74,5 +74,6 @@ export class CatalogComponent implements OnInit{
       this.currentPageIndex = event.page;
       this.updateCatalog();
     }
+    window.scrollTo(0, 0);
   }
 }
