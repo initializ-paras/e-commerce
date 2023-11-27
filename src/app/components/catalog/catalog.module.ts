@@ -11,6 +11,7 @@ import {FiltersService} from "../filters/filters.service";
 import {SortingService} from "./common/components/sort-dropdown/sorting.service";
 import {CatalogService} from "./catalog.service";
 import {PaginationModule} from "ngx-bootstrap/pagination";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import {PaginationModule} from "ngx-bootstrap/pagination";
     FiltersModule,
     RouterOutlet,
     PaginationModule,
+    FormsModule,
   ],
   providers: [
     FiltersService,

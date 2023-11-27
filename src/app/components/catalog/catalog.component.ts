@@ -21,10 +21,6 @@ export class CatalogComponent implements OnInit{
 
   isFiltersModalVisible: boolean = false;
 
-  categoryMapping: { [key: string]: string } = {
-    'personal_computers': 'personalcomputer',
-  };
-
   constructor(private catalogService : CatalogService, public filterService : FiltersService,
               private route : ActivatedRoute, private router: Router) {
   }
@@ -36,7 +32,7 @@ export class CatalogComponent implements OnInit{
   updateCatalog(): void {
     this.route.params.subscribe(params => {
       this.category = params['category'];
-      const apiCategory = this.categoryMapping[this.category] || this.category;
+      const apiCategory = this.filterService.categoryMapping[this.category] || this.category;
       this.catalogService.getPaginatedCatalog(apiCategory, this.currentPageIndex).subscribe({
         next: response => {
           this.items = response.items;
@@ -61,8 +57,8 @@ export class CatalogComponent implements OnInit{
   removeAllFilters(): void {
     this.filterService.clearSelectedFilters();
     this.updateCatalog();
-    let filters : FiltersComponent = new FiltersComponent(this.filterService);
-    filters.updateFilters(this.categoryMapping[this.category]);
+    let filters : FiltersComponent = new FiltersComponent(this.filterService, this.route);
+    filters.updateFilters(this.filterService.categoryMapping[this.category]);
   }
 
   changePageIndex(event : any): void {
