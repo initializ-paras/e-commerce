@@ -52,6 +52,14 @@ export class CatalogComponent implements OnInit{
 
   toggleFilters(): void {
     this.isFiltersModalVisible = !this.isFiltersModalVisible;
+
+    const body = document.body!;
+    if (body.classList.contains('overflow-y-auto')) {
+      body.classList.replace('overflow-y-auto', 'overflow-y-hidden');
+    }
+    else if (body.classList.contains('overflow-y-hidden')) {
+      body.classList.replace('overflow-y-hidden', 'overflow-y-auto');
+    }
   }
 
   removeAllFilters(): void {
