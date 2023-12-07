@@ -13,10 +13,12 @@ import {SharedModule} from "./modules/shared/shared.module";
 import { NgxSliderModule } from 'ngx-slider-v2';
 import {CustomRouteReuseStrategy} from "./custom-route-reuse-strategy";
 import {RouteReuseStrategy} from "@angular/router";
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
