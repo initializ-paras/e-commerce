@@ -36,6 +36,7 @@ export class BasicAccordionComponent {
     }
 
     this.catalogComponent.currentPageIndex = 1;
+    window.scrollTo(0, 0);
 
     this.filterComponent.updateFilters();
     this.catalogComponent.updateCatalog();

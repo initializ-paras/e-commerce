@@ -75,6 +75,9 @@ export class PriceRangeAccordionComponent {
 
     this.addPriceRangeToSelectedFilters(lowerValue, upperValue);
 
+    this.catalogComponent.currentPageIndex = 1;
+    window.scrollTo(0, 0);
+
     this.filterComponent.updateFilters();
     this.catalogComponent.updateCatalog();
   }
