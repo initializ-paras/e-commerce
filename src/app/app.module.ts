@@ -10,7 +10,6 @@ import {CatalogModule} from "./components/catalog/catalog.module";
 import {HomeModule} from "./home/home.module";
 import {FiltersModule} from "./components/filters/filters.module";
 import {SharedModule} from "./modules/shared/shared.module";
-import { NgxSliderModule } from 'ngx-slider-v2';
 import {CustomRouteReuseStrategy} from "./custom-route-reuse-strategy";
 import {RouteReuseStrategy} from "@angular/router";
 import { FooterComponent } from './components/footer/footer.component';
@@ -31,7 +30,6 @@ import { FooterComponent } from './components/footer/footer.component';
     HomeModule,
     FiltersModule,
     SharedModule,
-    NgxSliderModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: CustomRouteReuseStrategy },
