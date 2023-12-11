@@ -13,12 +13,14 @@ import {SharedModule} from "./modules/shared/shared.module";
 import {CustomRouteReuseStrategy} from "./custom-route-reuse-strategy";
 import {RouteReuseStrategy} from "@angular/router";
 import { FooterComponent } from './components/footer/footer.component';
+import {ScrollerComponent} from "./components/scroller/scroller.component";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    FooterComponent
-  ],
+    declarations: [
+        AppComponent,
+        FooterComponent,
+        ScrollerComponent
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
