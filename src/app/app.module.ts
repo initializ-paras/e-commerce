@@ -28,7 +28,6 @@ import {ScrollerComponent} from "./components/scroller/scroller.component";
     FormsModule,
     HttpClientModule,
     CoreModule,
-    CatalogModule,
     HomeModule,
     FiltersModule,
     SharedModule,
