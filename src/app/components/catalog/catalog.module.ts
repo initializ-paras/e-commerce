@@ -12,6 +12,7 @@ import {SortingService} from "./common/components/sort-dropdown/sorting.service"
 import {CatalogService} from "./catalog.service";
 import {PaginationModule} from "ngx-bootstrap/pagination";
 import {FormsModule} from "@angular/forms";
+import {SharedModule} from "../../modules/shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import {FormsModule} from "@angular/forms";
     RouterOutlet,
     PaginationModule,
     FormsModule,
+    SharedModule,
   ],
   providers: [
     FiltersService,
