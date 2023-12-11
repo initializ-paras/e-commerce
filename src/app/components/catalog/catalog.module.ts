@@ -13,6 +13,7 @@ import {CatalogService} from "./catalog.service";
 import {PaginationModule} from "ngx-bootstrap/pagination";
 import {FormsModule} from "@angular/forms";
 import {SharedModule} from "../../modules/shared/shared.module";
+import {CatalogRoutingModule} from "./catalog-routing.module";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import {SharedModule} from "../../modules/shared/shared.module";
     ProductCardComponent,
     FilterTagComponent,
     FilterModalComponent,
-    SortDropdownComponent,
+    SortDropdownComponent
   ],
   imports: [
     CommonModule,
@@ -29,6 +30,7 @@ import {SharedModule} from "../../modules/shared/shared.module";
     PaginationModule,
     FormsModule,
     SharedModule,
+    CatalogRoutingModule
   ],
   providers: [
     FiltersService,
