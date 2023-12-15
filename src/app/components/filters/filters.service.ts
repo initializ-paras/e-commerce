@@ -4,10 +4,11 @@ import {FiltersData} from "../../modules/shared/models/filters-data";
 import {FilterSpecification} from "./common/models/filter-specification";
 import {FilterBaseElement} from "./common/models/filter-base-element";
 import {SearchService} from "../navigation-bar/search-bar/search.service";
+import {environment} from "../../../environments/environment";
 
 @Injectable()
 export class FiltersService {
-  baseApiUrl: string = "https://localhost:7001/api/";
+  baseApiUrl: string = environment.apiUrl;
   filterCategory!: string | null;
   minimalPrice!: number;
   maximumPrice!: number;

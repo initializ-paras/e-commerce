@@ -4,10 +4,11 @@ import {Pagination} from "../../modules/shared/models/pagination";
 import {GeneralizedProduct} from "../../modules/shared/models/generalized-product";
 import {FiltersService} from "../filters/filters.service";
 import {SearchService} from "../navigation-bar/search-bar/search.service";
+import {environment} from "../../../environments/environment";
 
 @Injectable()
 export class CatalogService {
-  baseApiUrl : string = "https://localhost:7001/api/"
+  baseApiUrl : string = environment.apiUrl;
 
   constructor(public filtersService : FiltersService, private searchService: SearchService,
               private http : HttpClient) { }
