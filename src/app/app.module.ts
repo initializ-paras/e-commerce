@@ -14,16 +14,17 @@ import {CustomRouteReuseStrategy} from "./custom-route-reuse-strategy";
 import {RouteReuseStrategy} from "@angular/router";
 import { FooterComponent } from './components/footer/footer.component';
 import {ScrollerComponent} from "./components/scroller/scroller.component";
+import { ErrorComponent } from './components/error/error.component';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        FooterComponent,
-        ScrollerComponent
-    ],
+  declarations: [
+    AppComponent,
+    FooterComponent,
+    ScrollerComponent,
+    ErrorComponent
+  ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
@@ -31,6 +32,7 @@ import {ScrollerComponent} from "./components/scroller/scroller.component";
     HomeModule,
     FiltersModule,
     SharedModule,
+    AppRoutingModule,
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: CustomRouteReuseStrategy },
