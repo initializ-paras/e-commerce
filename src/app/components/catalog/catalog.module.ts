@@ -24,13 +24,13 @@ import {CatalogRoutingModule} from "./catalog-routing.module";
     SortDropdownComponent
   ],
   imports: [
+    CatalogRoutingModule,
     CommonModule,
     FiltersModule,
     RouterOutlet,
     PaginationModule,
     FormsModule,
     SharedModule,
-    CatalogRoutingModule
   ],
   providers: [
     FiltersService,
