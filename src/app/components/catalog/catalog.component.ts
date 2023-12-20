@@ -4,6 +4,8 @@ import {GeneralizedProduct} from "../../modules/shared/models/generalized-produc
 import {ActivatedRoute, Router} from "@angular/router";
 import {FiltersService} from "../filters/filters.service";
 import {FiltersComponent} from "../filters/filters.component";
+import {SortDropdownComponent} from "./common/components/sort-dropdown/sort-dropdown.component";
+import {SortingService} from "./common/components/sort-dropdown/sorting.service";
 
 @Component({
   selector: 'app-catalog',
@@ -22,7 +24,7 @@ export class CatalogComponent implements OnInit{
   isFiltersModalVisible: boolean = false;
 
   constructor(private catalogService : CatalogService, public filterService : FiltersService,
-              private route : ActivatedRoute, private router: Router) {
+              private sortingService: SortingService, private route : ActivatedRoute, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -68,6 +70,8 @@ export class CatalogComponent implements OnInit{
     this.updateCatalog();
     let filters : FiltersComponent = new FiltersComponent(this.filterService, this.route);
     filters.updateFilters(this.filterService.categoryMapping[this.category]);
+    let sortingFilters : SortDropdownComponent = new SortDropdownComponent(this.sortingService, this, this.filterService);
+    sortingFilters.selectValue("Rating");
   }
 
   changePageIndex(event : any): void {
