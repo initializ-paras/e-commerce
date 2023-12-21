@@ -6,6 +6,9 @@ import {FiltersService} from "../filters/filters.service";
 import {FiltersComponent} from "../filters/filters.component";
 import {SortDropdownComponent} from "./common/components/sort-dropdown/sort-dropdown.component";
 import {SortingService} from "./common/components/sort-dropdown/sorting.service";
+import {
+  PriceRangeAccordionComponent
+} from "../filters/common/components/price-range-accordion/price-range-accordion.component";
 
 @Component({
   selector: 'app-catalog',
@@ -72,6 +75,12 @@ export class CatalogComponent implements OnInit{
     filters.updateFilters(this.filterService.categoryMapping[this.category]);
     let sortingFilters : SortDropdownComponent = new SortDropdownComponent(this.sortingService, this, this.filterService);
     sortingFilters.selectValue("Rating");
+    const lowerPriceLimitInput = document.getElementById(
+      'lowerpricelimit') as HTMLInputElement;
+    const upperPriceLimitInput = document.getElementById(
+      'upperpricelimit') as HTMLInputElement;
+    lowerPriceLimitInput.value = '';
+    upperPriceLimitInput.value = '';
   }
 
   changePageIndex(event : any): void {
