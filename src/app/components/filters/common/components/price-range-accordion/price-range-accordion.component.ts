@@ -150,6 +150,14 @@ export class PriceRangeAccordionComponent {
     } else {
       this.filterService.selectedFilters.push(value);
     }
+
+    const lowerPriceLimitInput = document.getElementById(
+      'lowerpricelimit') as HTMLInputElement;
+    const upperPriceLimitInput = document.getElementById(
+      'upperpricelimit') as HTMLInputElement;
+
+    lowerPriceLimitInput.value = '';
+    upperPriceLimitInput.value = '';
   }
 
     protected readonly Object = Object;
