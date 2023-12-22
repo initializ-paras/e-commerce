@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {CoreModule} from "./modules/core/core.module";
 import {CatalogModule} from "./components/catalog/catalog.module";
 import {HomeModule} from "./home/home.module";
@@ -15,6 +15,7 @@ import {RouteReuseStrategy} from "@angular/router";
 import { FooterComponent } from './components/footer/footer.component';
 import {ScrollerComponent} from "./components/scroller/scroller.component";
 import { ErrorComponent } from './components/error/error.component';
+import {ErrorInterceptor} from "./core/interceptors/error.interceptor";
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ErrorComponent } from './components/error/error.component';
     ],
   providers: [
     { provide: RouteReuseStrategy, useClass: CustomRouteReuseStrategy },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
