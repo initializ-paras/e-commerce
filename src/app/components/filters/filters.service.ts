@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {FiltersData} from "../../modules/shared/models/filters-data";
 import {FilterSpecification} from "./common/models/filter-specification";
@@ -23,8 +23,12 @@ export class FiltersService {
   apiVariableNameMaps: { [key: string]: string } = {
     'Brands' : 'brandname',
     'Categories' : 'category',
-    'Availability' : 'instock',
     'Classification' : 'classification',
+    'Model family' : 'modelfamily',
+    'Display diagonal' : 'displaydiagonal',
+    'Display resolution' : 'displayresolution',
+    'Display refresh rate' : 'displayrefreshrate',
+    'Display matrix type' : 'displaymatrixtype',
     'Operating system' : 'operatingsystem',
     'CPU brand' : 'processorbrand',
     'CPU model' : 'processormodel',
@@ -44,6 +48,11 @@ export class FiltersService {
   titleMapping: { [key: string]: string } = {
     'general_classification': 'Classification',
     'general_operating_system': 'Operating system',
+    'general_model_family': 'Model family',
+    'display_diagonal': 'Display diagonal',
+    'display_matrix_type': 'Display matrix type',
+    'display_refresh_rate': 'Display refresh rate',
+    'display_resolution': 'Display resolution',
     'processor_manufacturer': 'CPU brand',
     'processor_model': 'CPU model',
     'processor_series': 'CPU series',
@@ -61,6 +70,7 @@ export class FiltersService {
 
   categoryMapping: { [key: string]: string } = {
     'personal_computers': 'personalcomputer',
+    'laptops': 'laptop',
     'search_results': 'productsearch'
   };
 
@@ -77,10 +87,8 @@ export class FiltersService {
   }
 
   getFilterOnlyArray() : string[] {
-    let filteredFilters = this.selectedFilters.filter(
+    return this.selectedFilters.filter(
       filter => !filter.includes('sortingtype'));
-
-    return filteredFilters;
   }
 
   clearSelectedFilters(): void {
