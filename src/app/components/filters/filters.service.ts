@@ -5,6 +5,9 @@ import {FilterSpecification} from "./common/models/filter-specification";
 import {FilterBaseElement} from "./common/models/filter-base-element";
 import {SearchService} from "../navigation-bar/search-bar/search.service";
 import {environment} from "../../../environments/environment";
+import {SpecsRequestVariables} from "./common/models/specs-request-variables";
+import {SpecsHeadingVariablesVariables} from "./common/models/specs-heading-variables";
+import {SpecsCategoryVariables} from "./common/models/specs-category-variables";
 
 @Injectable()
 export class FiltersService {
@@ -20,59 +23,9 @@ export class FiltersService {
   filterCategories: FilterBaseElement = {};
   selectedFilters: string[] = [];
 
-  apiVariableNameMaps: { [key: string]: string } = {
-    'Brands' : 'brandname',
-    'Categories' : 'category',
-    'Classification' : 'classification',
-    'Model family' : 'modelfamily',
-    'Display diagonal' : 'displaydiagonal',
-    'Display resolution' : 'displayresolution',
-    'Display refresh rate' : 'displayrefreshrate',
-    'Display matrix type' : 'displaymatrixtype',
-    'Operating system' : 'operatingsystem',
-    'CPU brand' : 'processorbrand',
-    'CPU model' : 'processormodel',
-    'CPU series' : 'processorseries',
-    'CPU cores quantity' : 'coresquantity',
-    'GPU brand' : 'graphicscardbrand',
-    'GPU model' : 'graphicscardmodel',
-    'GPU series' : 'graphicscardseries',
-    'GPU type' : 'graphicscardtype',
-    'GPU memory capacity' : 'graphicscardmemorycapacity',
-    'RAM type' : 'ramtype',
-    'RAM memory capacity' : 'ramcapacity',
-    'Storage type' : 'storagetype',
-    'Storage memory capacity' : 'storagecapacity',
-  };
-
-  titleMapping: { [key: string]: string } = {
-    'general_classification': 'Classification',
-    'general_operating_system': 'Operating system',
-    'general_model_family': 'Model family',
-    'display_diagonal': 'Display diagonal',
-    'display_matrix_type': 'Display matrix type',
-    'display_refresh_rate': 'Display refresh rate',
-    'display_resolution': 'Display resolution',
-    'processor_manufacturer': 'CPU brand',
-    'processor_model': 'CPU model',
-    'processor_series': 'CPU series',
-    'processor_quantity_of_cores': 'CPU cores quantity',
-    'graphics_card_manufacturer': 'GPU brand',
-    'graphics_card_model': 'GPU model',
-    'graphics_card_series': 'GPU series',
-    'graphics_card_type': 'GPU type',
-    'graphics_card_amount_of_memory': 'GPU memory capacity',
-    'random_access_memory_amount_of_memory': 'RAM memory capacity',
-    'random_access_memory_type': 'RAM type',
-    'storage_amount_of_memory': 'Storage memory capacity',
-    'storage_type': 'Storage type',
-  };
-
-  categoryMapping: { [key: string]: string } = {
-    'personal_computers': 'personalcomputer',
-    'laptops': 'laptop',
-    'search_results': 'productsearch'
-  };
+  apiVariableNameMaps: { [key: string]: string } = new SpecsRequestVariables().variableNameMaps;
+  titleMapping: { [key: string]: string } = new SpecsHeadingVariablesVariables().titleMapping;
+  categoryMapping: { [key: string]: string } = new SpecsCategoryVariables().categoryMapping;
 
   constructor(private http : HttpClient, private searchService: SearchService) { }
 
