@@ -16,6 +16,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import {ScrollerComponent} from "./components/scroller/scroller.component";
 import { ErrorComponent } from './components/error/error.component';
 import {ErrorInterceptor} from "./core/interceptors/error.interceptor";
+import {BreadcrumbModule} from "xng-breadcrumb";
 
 @NgModule({
   declarations: [
@@ -25,16 +26,17 @@ import {ErrorInterceptor} from "./core/interceptors/error.interceptor";
     ErrorComponent
   ],
     imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        HttpClientModule,
-        CoreModule,
-        HomeModule,
-        FiltersModule,
-        SharedModule,
-        AppRoutingModule,
-        CatalogModule,
+      BrowserModule,
+      BrowserAnimationsModule,
+      FormsModule,
+      HttpClientModule,
+      CoreModule,
+      HomeModule,
+      FiltersModule,
+      SharedModule,
+      AppRoutingModule,
+      CatalogModule,
+      BreadcrumbModule
     ],
   providers: [
     { provide: RouteReuseStrategy, useClass: CustomRouteReuseStrategy },
