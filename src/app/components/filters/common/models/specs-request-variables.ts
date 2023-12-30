@@ -1,0 +1,26 @@
+export class SpecsRequestVariables {
+  variableNameMaps: { [key: string]: string } = {
+    'Brands' : 'brandname',
+    'Categories' : 'category',
+    'Classification' : 'classification',
+    'Model family' : 'modelfamily',
+    'Display diagonal' : 'displaydiagonal',
+    'Display resolution' : 'displayresolution',
+    'Display refresh rate' : 'displayrefreshrate',
+    'Display matrix type' : 'displaymatrixtype',
+    'Operating system' : 'operatingsystem',
+    'CPU brand' : 'processorbrand',
+    'CPU model' : 'processormodel',
+    'CPU series' : 'processorseries',
+    'CPU cores quantity' : 'coresquantity',
+    'GPU brand' : 'graphicscardbrand',
+    'GPU model' : 'graphicscardmodel',
+    'GPU series' : 'graphicscardseries',
+    'GPU type' : 'graphicscardtype',
+    'GPU memory capacity' : 'graphicscardmemorycapacity',
+    'RAM type' : 'ramtype',
+    'RAM memory capacity' : 'ramcapacity',
+    'Storage type' : 'storagetype',
+    'Storage memory capacity' : 'storagecapacity',
+  };
+}
