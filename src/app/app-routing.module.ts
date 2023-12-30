@@ -4,7 +4,7 @@ import {HomeComponent} from "./home/home.component";
 import {ErrorComponent} from "./components/error/error.component";
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: HomeComponent, data: { breadcrumb: { label: 'Home' } } },
   { path: 'catalog', loadChildren: () => import('./components/catalog/catalog.module').then(m => m.CatalogModule) },
   { path: 'error', component: ErrorComponent },
   { path: '**', redirectTo: 'error', pathMatch: 'full' }

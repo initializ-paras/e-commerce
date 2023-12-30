@@ -14,6 +14,7 @@ import {PaginationModule} from "ngx-bootstrap/pagination";
 import {FormsModule} from "@angular/forms";
 import {SharedModule} from "../../modules/shared/shared.module";
 import {CatalogRoutingModule} from "./catalog-routing.module";
+import {BreadcrumbModule} from "xng-breadcrumb";
 
 @NgModule({
   declarations: [
@@ -23,15 +24,16 @@ import {CatalogRoutingModule} from "./catalog-routing.module";
     FilterModalComponent,
     SortDropdownComponent
   ],
-  imports: [
-    CatalogRoutingModule,
-    CommonModule,
-    FiltersModule,
-    RouterOutlet,
-    PaginationModule,
-    FormsModule,
-    SharedModule,
-  ],
+    imports: [
+        CatalogRoutingModule,
+        CommonModule,
+        FiltersModule,
+        RouterOutlet,
+        PaginationModule,
+        FormsModule,
+        SharedModule,
+        BreadcrumbModule,
+    ],
   providers: [
     FiltersService,
     SortingService,

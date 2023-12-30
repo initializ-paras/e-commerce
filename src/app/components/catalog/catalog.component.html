@@ -1,3 +1,6 @@
+<main *ngIf="this.category === undefined" class="flex flex-col my-4 w-fit lg:w-[62rem] xl:w-[78rem] min-[1361px]:w-[82rem] mx-auto max-w-[82rem] min-h-[81vh]">
+  gffddfgfdgdf
+</main>
 <main *ngIf="totalItemsQuantity === 0" class="flex flex-col my-4 max-w:[82rem] min-h-[81vh]">
   <app-filter-modal [showModal]="isFiltersModalVisible"
                     [category]="this.filterService.categoryMapping[category]"
@@ -49,6 +52,11 @@
   </div>
 </main>
 <main *ngIf="totalItemsQuantity > 0" class="flex flex-col my-4 w-fit lg:w-[62rem] xl:w-[78rem] min-[1361px]:w-[82rem] mx-auto max-w-[82rem] min-h-[81vh]">
+  <xng-breadcrumb separator=">" class="ml-1.5 mb-2 lg:ml-3.5 select-none" draggable="false">
+    <ng-container *xngBreadcrumbItem="let breadcrumb">
+      <ng-container>{{ breadcrumb }}</ng-container>
+    </ng-container>
+  </xng-breadcrumb>
   <app-filter-modal [showModal]="isFiltersModalVisible"
                     [category]="this.filterService.categoryMapping[category]"
                     (closeModal)="toggleFilters()"

@@ -6,9 +6,7 @@ import {FiltersService} from "../filters/filters.service";
 import {FiltersComponent} from "../filters/filters.component";
 import {SortDropdownComponent} from "./common/components/sort-dropdown/sort-dropdown.component";
 import {SortingService} from "./common/components/sort-dropdown/sorting.service";
-import {
-  PriceRangeAccordionComponent
-} from "../filters/common/components/price-range-accordion/price-range-accordion.component";
+import {BreadcrumbService} from "xng-breadcrumb";
 
 @Component({
   selector: 'app-catalog',
@@ -27,7 +25,8 @@ export class CatalogComponent implements OnInit{
   isFiltersModalVisible: boolean = false;
 
   constructor(private catalogService : CatalogService, public filterService : FiltersService,
-              private sortingService: SortingService, private route : ActivatedRoute, private router: Router) {
+              private sortingService: SortingService, private bcService: BreadcrumbService,
+              private route : ActivatedRoute, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -38,16 +37,21 @@ export class CatalogComponent implements OnInit{
   updateCatalog(): void {
     this.route.params.subscribe(params => {
       this.category = params['category'];
+
+      if (this.category === undefined) return;
+
       const apiCategory = this.filterService.categoryMapping[this.category] || this.category;
       this.catalogService.getPaginatedCatalog(apiCategory, this.currentPageIndex).subscribe({
         next: response => {
           this.items = response.items;
           this.totalItemsQuantity = response.totalItemsQuantity;
           this.currentPageIndex = response.pageIndex;
+          this.bcService.set('@productCategory',
+            this.category.charAt(0).toUpperCase() + this.category.slice(1).replaceAll('_', ' '));
         },
         error: err => {
           if (err.status === 404) {
-            this.router.navigate(['/not-found']);
+            this.router.navigate(['/error']);
           } else {
             console.log(err);
           }

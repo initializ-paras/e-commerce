@@ -5,8 +5,28 @@ import {CatalogComponent} from "./catalog.component";
 import {FiltersService} from "../filters/filters.service";
 
 const catalogRoutes: Routes = [
-  { path: 'catalog/:category', component: CatalogComponent, data: { reuse: true } },
-  { path: 'catalog/search_results', component: CatalogComponent, data: { reuse: true } },
+  {
+    path: 'catalog',
+    children: [
+      {
+        path: ':category',
+        component: CatalogComponent,
+        data: { reuse: true, breadcrumb: { alias: 'productCategory' } },
+      },
+      {
+        path: 'search_results',
+        component: CatalogComponent,
+        data: { reuse: true },
+      },
+      {
+        path: '',
+        pathMatch: 'full',
+        component: CatalogComponent,
+        data: { reuse: true },
+      },
+    ],
+    data: { breadcrumb: { label: 'Catalog' } }
+  },
 ];
 
 @NgModule({
