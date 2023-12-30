@@ -85,6 +85,8 @@ export class CatalogComponent implements OnInit{
       'upperpricelimit') as HTMLInputElement;
     lowerPriceLimitInput.value = '';
     upperPriceLimitInput.value = '';
+    this.currentPageIndex = 1;
+    this.updateCatalog();
   }
 
   changePageIndex(event : any): void {
