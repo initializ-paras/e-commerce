@@ -15,24 +15,26 @@ import {FormsModule} from "@angular/forms";
 import {SharedModule} from "../../modules/shared/shared.module";
 import {CatalogRoutingModule} from "./catalog-routing.module";
 import {BreadcrumbModule} from "xng-breadcrumb";
+import {ProductDetailedComponent} from "./common/components/product-detailed/product-detailed.component";
 
 @NgModule({
   declarations: [
+    ProductDetailedComponent,
     CatalogComponent,
     ProductCardComponent,
     FilterTagComponent,
     FilterModalComponent,
-    SortDropdownComponent
+    SortDropdownComponent,
   ],
     imports: [
-        CatalogRoutingModule,
-        CommonModule,
-        FiltersModule,
-        RouterOutlet,
-        PaginationModule,
-        FormsModule,
-        SharedModule,
-        BreadcrumbModule,
+      CommonModule,
+      FiltersModule,
+      RouterOutlet,
+      PaginationModule,
+      FormsModule,
+      SharedModule,
+      BreadcrumbModule,
+      CatalogRoutingModule,
     ],
   providers: [
     FiltersService,
