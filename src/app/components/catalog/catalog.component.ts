@@ -7,13 +7,14 @@ import {FiltersComponent} from "../filters/filters.component";
 import {SortDropdownComponent} from "./common/components/sort-dropdown/sort-dropdown.component";
 import {SortingService} from "./common/components/sort-dropdown/sorting.service";
 import {BreadcrumbService} from "xng-breadcrumb";
+import {SearchService} from "../navigation-bar/search-bar/search.service";
 
 @Component({
   selector: 'app-catalog',
   templateUrl: './catalog.component.html'
 })
 
-export class CatalogComponent implements OnInit{
+export class CatalogComponent implements OnInit {
   items : GeneralizedProduct[] = [];
   url : string = this.catalogService.baseApiUrl;
   category : string = '';
@@ -21,12 +22,13 @@ export class CatalogComponent implements OnInit{
   itemsPerPage: number = 24;
   maxPaginationNavigationLinks: number = 10;
   currentPageIndex: number = 1;
+  searchedText!: string;
 
   isFiltersModalVisible: boolean = false;
 
-  constructor(private catalogService : CatalogService, public filterService : FiltersService,
+  constructor (private catalogService : CatalogService, public filterService : FiltersService,
               private sortingService: SortingService, private bcService: BreadcrumbService,
-              private route : ActivatedRoute, private router: Router) {
+              public searchService: SearchService, private route : ActivatedRoute, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -46,8 +48,10 @@ export class CatalogComponent implements OnInit{
           this.items = response.items;
           this.totalItemsQuantity = response.totalItemsQuantity;
           this.currentPageIndex = response.pageIndex;
-          this.bcService.set('@productCategory',
-            this.category.charAt(0).toUpperCase() + this.category.slice(1).replaceAll('_', ' '));
+          this.bcService.set(
+            '@productCategory', { label: this.category.charAt(0).toUpperCase()
+                + this.category.slice(1).replaceAll('_', ' ') });
+          this.searchedText = this.searchService.searchedText;
         },
         error: err => {
           if (err.status === 404) {
