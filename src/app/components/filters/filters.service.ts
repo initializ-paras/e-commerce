@@ -5,9 +5,9 @@ import {FilterSpecification} from "./common/models/filter-specification";
 import {FilterBaseElement} from "./common/models/filter-base-element";
 import {SearchService} from "../navigation-bar/search-bar/search.service";
 import {environment} from "../../../environments/environment";
-import {SpecsRequestVariables} from "./common/models/specs-request-variables";
-import {SpecsHeadingVariablesVariables} from "./common/models/specs-heading-variables";
-import {SpecsCategoryVariables} from "./common/models/specs-category-variables";
+import {SpecsRequestVariables} from "../../modules/shared/models/specs-request-variables";
+import {SpecsHeadingVariablesVariables} from "../../modules/shared/models/specs-heading-variables";
+import {SpecsCategoryVariables} from "../../modules/shared/models/specs-category-variables";
 
 @Injectable()
 export class FiltersService {
