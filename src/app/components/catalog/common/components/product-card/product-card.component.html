@@ -21,7 +21,7 @@
     </button>
   </div>
   <div class="items-center object-cover h-[10em] w-[10em] overflow-hidden select-none mx-auto">
-    <a href="">
+    <a [routerLink]="['/catalog', getProductUrlCategory(), 'item', product.productCode]">
       <img draggable="false" src="{{product.images[0]}}" alt="{{product.category + ' ' + product.name}}" class="w-full h-full object-contain">
     </a>
   </div>
@@ -31,7 +31,10 @@
     <div *ngIf="product.inStock === 'False'" class="border border-neutral-600 rounded-3xl w-2 h-2 bg-neutral-300"></div>
     <span *ngIf="product.inStock === 'False'" class="text-xs mx-2 font-bold">Not in stock</span>
   </div>
-  <a href="" class="mt-2 font-bold text-sm mx-2 transition line-clamp-2 duration-300 hover:underline hover:scale-105">{{product.category + ' ' + product.name}}</a>
+  <a [routerLink]="['/catalog', getProductUrlCategory(), 'item', product.productCode]"
+     class="mt-2 font-bold text-sm mx-2 transition line-clamp-2 duration-300 hover:underline hover:scale-105">
+    {{product.category + ' ' + product.name}}
+  </a>
   <div class="flex flex-row mt-2 mx-2 items-center">
     <svg class="h-3 w-3 fill-amber-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 47.94 47.94" xml:space="preserve">
           <path
