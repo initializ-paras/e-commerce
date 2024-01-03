@@ -1,7 +1,7 @@
 import {GeneralizedProduct} from "./generalized-product";
 
 export interface Product extends GeneralizedProduct{
-  shortDescription: string;
+  description: string;
   specifications: {
     [key: string]: {
       [key: string]: string;
