@@ -28,12 +28,17 @@ export class CatalogComponent implements OnInit {
 
   constructor (private catalogService : CatalogService, public filterService : FiltersService,
               private sortingService: SortingService, private bcService: BreadcrumbService,
-              public searchService: SearchService, private route : ActivatedRoute, private router: Router) {
+              public searchService: SearchService, private route : ActivatedRoute, private router: Router)
+  {
+    this.bcService.set(
+      '@productCategory', { label: this.category.charAt(0).toUpperCase()
+          + this.category.slice(1).replaceAll('_', '...') });
   }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
     this.updateCatalog();
+    this.updateFilters();
   }
 
   updateCatalog(): void {
@@ -62,6 +67,13 @@ export class CatalogComponent implements OnInit {
         }
       });
     });
+  }
+
+  updateFilters(): void {
+    if (this.category === undefined) return;
+
+    let filters: FiltersComponent = new FiltersComponent(this.filterService, this.route);
+    filters.updateFilters(this.filterService.categoryMapping[this.category]);
   }
 
   toggleFilters(): void {
