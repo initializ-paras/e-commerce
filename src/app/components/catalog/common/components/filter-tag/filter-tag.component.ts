@@ -20,8 +20,6 @@ export class FilterTagComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.initialFilter);
-
     let isPriceFilter : boolean = this.initialFilter.includes("lowerpricelimit");
 
     if (isPriceFilter) {
