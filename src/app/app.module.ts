@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +17,8 @@ import {ScrollerComponent} from "./components/scroller/scroller.component";
 import { ErrorComponent } from './components/error/error.component';
 import {ErrorInterceptor} from "./core/interceptors/error.interceptor";
 import {BreadcrumbModule} from "xng-breadcrumb";
+import {LoadingInterceptor} from "./core/interceptors/loading.interceptor";
+import {NgxSpinnerModule} from "ngx-spinner";
 
 @NgModule({
   declarations: [
@@ -25,23 +27,26 @@ import {BreadcrumbModule} from "xng-breadcrumb";
     ScrollerComponent,
     ErrorComponent
   ],
-    imports: [
-      BrowserModule,
-      BrowserAnimationsModule,
-      FormsModule,
-      HttpClientModule,
-      CoreModule,
-      HomeModule,
-      FiltersModule,
-      SharedModule,
-      AppRoutingModule,
-      CatalogModule,
-      BreadcrumbModule
-    ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    HttpClientModule,
+    CoreModule,
+    HomeModule,
+    FiltersModule,
+    SharedModule,
+    AppRoutingModule,
+    CatalogModule,
+    BreadcrumbModule,
+    NgxSpinnerModule
+  ],
   providers: [
     { provide: RouteReuseStrategy, useClass: CustomRouteReuseStrategy },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
