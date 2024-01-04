@@ -16,10 +16,14 @@ export class ProductDetailedComponent implements OnInit {
   product!: Product;
 
   constructor(private http : HttpClient, private bcService: BreadcrumbService,
-              private searchService: SearchService, private route : ActivatedRoute) {
+              private searchService: SearchService, private route : ActivatedRoute)
+  {
+    this.bcService.set('@productItem', { label: '...' });
   }
 
   ngOnInit() {
+    window.scrollTo(0, 0);
+
     let urlCategory: string;
     let category: string;
     let code: string;
