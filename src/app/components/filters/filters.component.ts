@@ -7,15 +7,11 @@ import {ActivatedRoute} from "@angular/router";
   selector: 'app-filters',
   templateUrl: './filters.component.html'
 })
-export class FiltersComponent implements OnInit {
+export class FiltersComponent {
   @Input() category! : string;
   protected readonly Object = Object;
 
   constructor(public filtersService : FiltersService, private route: ActivatedRoute) {
-  }
-
-  ngOnInit(): void {
-    this.updateFilters();
   }
 
   private checkAndClearFilters(category: string): void {
