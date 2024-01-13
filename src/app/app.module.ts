@@ -19,6 +19,7 @@ import {ErrorInterceptor} from "./core/interceptors/error.interceptor";
 import {BreadcrumbModule} from "xng-breadcrumb";
 import {LoadingInterceptor} from "./core/interceptors/loading.interceptor";
 import {NgxSpinnerModule} from "ngx-spinner";
+import {BasketModule} from "./components/basket/basket.module";
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {NgxSpinnerModule} from "ngx-spinner";
     AppRoutingModule,
     CatalogModule,
     BreadcrumbModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    BasketModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: CustomRouteReuseStrategy },
