@@ -1,0 +1,9 @@
+<div [@fadeInOutBg]="isBasketOpen ? 'open' : 'closed'" *ngIf="isBasketOpen"
+     class="z-50 fixed overflow-y-hidden w-full h-[100vh]  flex justify-center items-center">
+  <div class="bg-black opacity-50 h-full w-full z-50 top-0 left-0 fixed" (click)="toggleBasket()"></div>
+  <div [@fadeInOutWindow]="isBasketOpen ? 'open' : 'closed'" *ngIf="isBasketOpen"
+       class="h-[90%] w-[85%] bg-white rounded-xl z-50 overflow-y-auto p-2 fixed ">
+
+  </div>
+</div>
+
