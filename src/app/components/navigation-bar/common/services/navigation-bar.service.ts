@@ -5,12 +5,14 @@ import {BehaviorSubject, Observable} from "rxjs";
   providedIn: 'root'
 })
 export class NavigationBarService {
-  private isMenuOpenSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public isMenuOpenSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public isBasketOpenSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   isMenuOpen$: Observable<boolean> = this.isMenuOpenSubject.asObservable();
+  isBasketOpen$: Observable<boolean> = this.isBasketOpenSubject.asObservable();
 
-  toggleMenu(): void {
-    this.isMenuOpenSubject.next(!this.isMenuOpenSubject.value);
+  toggleFeature(subject: BehaviorSubject<boolean>): void {
+    subject.next(!subject.value);
     this.updateBodyOverflowClass();
   }
 
