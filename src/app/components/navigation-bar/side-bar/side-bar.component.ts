@@ -10,16 +10,16 @@ import {sideBarAnimation, sideBarBackgroundAnimation} from "./animations/side-ba
 export class SideBarComponent implements OnInit {
   isMenuOpen: boolean = false;
 
-  constructor(private menuService: NavigationBarService) {
+  constructor(private navigationBarService: NavigationBarService) {
   }
 
   ngOnInit(): void {
-    this.menuService.isMenuOpen$.subscribe((isOpen) => {
+    this.navigationBarService.isMenuOpen$.subscribe((isOpen) => {
       this.isMenuOpen = isOpen;
     });
   }
 
   toggleSideBar() {
-    this.menuService.toggleMenu();
+    this.navigationBarService.toggleFeature(this.navigationBarService.isMenuOpenSubject);
   }
 }
