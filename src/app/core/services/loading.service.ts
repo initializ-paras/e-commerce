@@ -10,6 +10,7 @@ export class LoadingService {
   constructor(private spinnerService: NgxSpinnerService) { }
 
   execute() {
+    document.body.classList.replace('overflow-y-auto', 'overflow-y-hidden');
     this.requestCount++;
     this.spinnerService.show(undefined, {
       bdColor: "rgba(255,255,255, 0.9)",
@@ -21,6 +22,7 @@ export class LoadingService {
   }
 
   terminate() {
+    document.body.classList.replace('overflow-y-hidden', 'overflow-y-auto');
     this.requestCount--;
     if (this.requestCount <= 0) {
       this.requestCount = 0;
