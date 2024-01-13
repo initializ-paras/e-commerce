@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CatalogService} from "./catalog.service";
 import {GeneralizedProduct} from "../../modules/shared/models/generalized-product";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -39,6 +39,13 @@ export class CatalogComponent implements OnInit {
     window.scrollTo(0, 0);
     this.updateCatalog();
     this.updateFilters();
+
+    console.log(this.category)
+
+    if (this.category !== 'search_results') {
+      this.searchedText = '';
+      this.searchService.searchedText = '';
+    }
   }
 
   updateCatalog(): void {
