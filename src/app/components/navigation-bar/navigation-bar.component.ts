@@ -7,9 +7,13 @@ import {NavigationBarService} from "./common/services/navigation-bar.service";
 })
 
 export class NavigationBarComponent{
-  constructor(private sharedService: NavigationBarService) {}
+  constructor(private navigationBarService: NavigationBarService) {}
 
   toggleSideBar() {
-    this.sharedService.toggleMenu();
+    this.navigationBarService.toggleFeature(this.navigationBarService.isMenuOpenSubject);
+  }
+
+  toggleBasket() {
+    this.navigationBarService.toggleFeature(this.navigationBarService.isBasketOpenSubject);
   }
 }
