@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {basketModalBackgroundAnimation, basketModalWindowAnimation} from "./basket.animations";
-import {NavigationBarService} from "../navigation-bar/common/services/navigation-bar.service";
+import {NavigationBarService} from "../../navigation-bar/common/services/navigation-bar.service";
 
 @Component({
   selector: 'app-basket',
