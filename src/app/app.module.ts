@@ -19,7 +19,7 @@ import {ErrorInterceptor} from "./core/interceptors/error.interceptor";
 import {BreadcrumbModule} from "xng-breadcrumb";
 import {LoadingInterceptor} from "./core/interceptors/loading.interceptor";
 import {NgxSpinnerModule} from "ngx-spinner";
-import {BasketModule} from "./components/basket/basket.module";
+import {BasketModule} from "./components/features/basket/basket.module";
 
 @NgModule({
   declarations: [
