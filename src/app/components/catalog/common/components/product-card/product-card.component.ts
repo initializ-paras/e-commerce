@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {GeneralizedProduct} from "../../../../../modules/shared/models/generalized-product";
+import {BasketService} from "../../../../features/basket/basket.service";
 
 @Component({
   selector: 'app-product-card',
@@ -8,6 +9,9 @@ import {GeneralizedProduct} from "../../../../../modules/shared/models/generaliz
 
 export class ProductCardComponent {
   @Input() product!: GeneralizedProduct;
+
+  constructor(private basketService: BasketService) {
+  }
 
   getProductUrlCategory() : string {
     return this.pluralizeWord(
@@ -29,5 +33,9 @@ export class ProductCardComponent {
     }
 
     return word + 's';
+  }
+
+  addToBasket() {
+    this.basketService.addItemToBasket(this.product);
   }
 }

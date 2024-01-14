@@ -57,7 +57,8 @@
       </svg>
       <span class="text-sm min-[550px]:text-base font-bold">USD {{product.price}}</span>
     </div>
-    <button *ngIf="product.inStock === 'True'" class="rounded-3xl border-0 border-neutral-400 transition duration-300 hover:bg-emerald-200 -mt-1 -mr-2.5">
+    <button *ngIf="product.inStock === 'True'" (click)="addToBasket()"
+            class="rounded-3xl border-0 border-neutral-400 transition duration-300 hover:bg-emerald-200 -mt-1 -mr-2.5">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke=""
            class="w-7 h-7 m-1">
         <path
