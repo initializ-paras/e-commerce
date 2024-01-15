@@ -1,16 +1,25 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {GeneralizedProduct} from "../../../../../modules/shared/models/generalized-product";
 import {BasketService} from "../../../../features/basket/basket.service";
+import {BehaviorSubject} from "rxjs";
 
 @Component({
   selector: 'app-product-card',
   templateUrl: './product-card.component.html'
 })
 
-export class ProductCardComponent {
+export class ProductCardComponent implements OnInit {
   @Input() product!: GeneralizedProduct;
+  isAddedToBasket$ = new BehaviorSubject<boolean>(false);
 
   constructor(private basketService: BasketService) {
+  }
+
+  ngOnInit(): void {
+    if (this.basketService.getBasketValue()?.items.find
+    (i => i.productCode == this.product.productCode)) {
+      this.isAddedToBasket$.next(true);
+    }
   }
 
   getProductUrlCategory() : string {
@@ -37,5 +46,6 @@ export class ProductCardComponent {
 
   addToBasket() {
     this.basketService.addItemToBasket(this.product);
+    this.isAddedToBasket$.next(true);
   }
 }
