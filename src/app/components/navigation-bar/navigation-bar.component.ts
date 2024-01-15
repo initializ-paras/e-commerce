@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {NavigationBarService} from "./common/services/navigation-bar.service";
+import {BasketService} from "../features/basket/basket.service";
 
 @Component({
   selector: 'app-navigation-bar',
@@ -7,7 +8,7 @@ import {NavigationBarService} from "./common/services/navigation-bar.service";
 })
 
 export class NavigationBarComponent{
-  constructor(private navigationBarService: NavigationBarService) {}
+  constructor(private navigationBarService: NavigationBarService, public basketService: BasketService) {}
 
   toggleSideBar() {
     this.navigationBarService.toggleFeature(this.navigationBarService.isMenuOpenSubject);
