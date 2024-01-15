@@ -19,7 +19,7 @@ export class BasketService {
 
   constructor(private http: HttpClient) { }
 
-  getBasket(id: Guid) {
+  getBasket(id: string) {
     return this.http.get<ProductList<BasketItem>>(this.baseUrl + "basket/?listid=" + id)
       .subscribe({
       next: basket => this.basketSource.next(basket)
@@ -35,6 +35,17 @@ export class BasketService {
 
   getBasketValue() {
     return this.basketSource.value;
+  }
+
+  getBasketCount(items: BasketItem[] | undefined): string {
+    if (!items) return '0';
+
+    let result: number = items.reduce((totalItemsQuantity, item) =>
+      totalItemsQuantity + item.quantity, 0);
+
+    if (result > 9) return '9+';
+
+    return result.toString();
   }
 
   addItemToBasket(item: GeneralizedProduct | Product, quantity = 1) {
