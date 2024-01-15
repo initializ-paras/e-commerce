@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {GeneralizedProduct} from "./modules/shared/models/generalized-product";
+import {BasketService} from "./components/features/basket/basket.service";
 
 @Component({
   selector: 'app-root',
@@ -11,8 +12,13 @@ export class AppComponent implements OnInit{
   title = 'BuyIt.UI';
   items : GeneralizedProduct[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private basketService: BasketService) { }
 
   ngOnInit() {
+    const basketId = localStorage.getItem('basketId');
+
+    if (basketId) {
+      this.basketService.getBasket(basketId);
+    }
   }
 }
