@@ -1,7 +1,7 @@
 <div *ngIf="showModal" [@fadeInOutBg]="showModal ? 'enter' : 'leave'" class="flex justify-center items-center overflow-y-hidden">
-  <div class="bg-black opacity-50 h-full w-full z-50 top-0 left-0 fixed">
+  <div class="bg-black opacity-50 h-full w-full z-50 top-0 left-0 fixed" (click)="onCloseModal()">
   </div>
-  <div [@fadeInOutWindow]="showModal ? 'enter' : 'leave'" class="max-h-[90%] w-[85%] bg-white rounded-xl z-50 overflow-y-auto p-2 fixed top-12">
+  <div [@fadeInOutWindow]="showModal ? 'enter' : 'leave'" class="max-h-[90%] w-[85%] bg-white rounded-xl z-50 p-2 fixed top-12">
     <div class="mt-1 mb-2 flex flex-row justify-between items-center px-2">
       <div>
         <h3 class="text-2xl font-bold">Filters</h3>
@@ -12,9 +12,12 @@
         </svg>
       </button>
     </div>
-    <div>
+    <div class="flex flex-row justify-center my-2">
+      <div class="border-t w-[97.5%]"></div>
+    </div>
+    <div class="max-h-[90vh] overflow-y-auto">
       <div>
-        <div *ngIf="this.filterService.getFilterOnlyArray().length > 0" class="flex flex-wrap w-full overflow-y-auto">
+        <div *ngIf="this.filterService.getFilterOnlyArray().length > 0" class="flex flex-wrap w-full">
           <div class="w-fit h-fit mt-2 mx-1 bg-white border border-neutral-700 rounded-2xl select-none" draggable="false">
             <div class="mx-3 my-1 flex flex-row items-center">
               <div class="flex flex-row items-center">
@@ -35,7 +38,7 @@
                           class="mt-2 mb-1 mx-1 max-[400px]:text-xs"></app-filter-tag>
         </div>
       </div>
-    <div *ngIf="catalogComponent.items.length > 0" class="overflow-y-auto">
+    <div *ngIf="catalogComponent.items.length > 0" class="max-h-[80vh]">
       <app-filters [category]="category" class="mx-auto w-[15.75rem]" style="font-family: 'Open Sans', sans-serif;"></app-filters>
     </div>
   </div>
