@@ -89,6 +89,14 @@ export class BasketService {
     this.isAddedToBasketSources[productCode].next(status);
   }
 
+  getTotalBasketPrice(items: BasketItem[] | undefined): number {
+    if (!items) return 0;
+
+    const total = items.reduce((acc, item) => acc + item.quantity * item.price, 0);
+
+    return Number(total.toFixed(2));
+  }
+
   private mapProductToBasketItem(product: GeneralizedProduct | Product): BasketItem {
     return {
       name: product.name,
