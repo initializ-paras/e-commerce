@@ -14,7 +14,7 @@ export class BasketService {
   baseUrl: string = environment.apiUrl;
   basketSource: BehaviorSubject<ProductList<BasketItem>| null> =
     new BehaviorSubject<ProductList<BasketItem> | null>(null);
-  basketSource$ = this.basketSource.asObservable();
+  private isAddedToBasketSources: Record<string, BehaviorSubject<boolean>> = {};
 
   constructor(private http: HttpClient) { }
 
@@ -29,6 +29,20 @@ export class BasketService {
     return this.http.post<ProductList<BasketItem>>(this.baseUrl + "basket/createorupdate", basket)
       .subscribe({
         next: basket => this.basketSource.next(basket)
+      });
+  }
+
+  deleteBasket(id: string) {
+    return this.http.delete(this.baseUrl + "basket/delete?listid=" + id,
+      { responseType: 'text' })
+      .subscribe({
+        next: () => {
+          this.basketSource.next(null);
+          localStorage.removeItem('basketId')
+        },
+        error: error => {
+          console.error('Failed to delete basket:', error);
+        }
       });
   }
 
@@ -59,6 +73,20 @@ export class BasketService {
     const basket = this.getBasketValue() ?? this.createNewBasket();
     basket.items = this.addOrUpdateItem(basket.items, addedItem, quantity);
     this.setBasket(basket);
+  }
+
+  isAddedToBasket$(productCode: string) {
+    if (!this.isAddedToBasketSources[productCode]) {
+      this.isAddedToBasketSources[productCode] = new BehaviorSubject<boolean>(false);
+    }
+    return this.isAddedToBasketSources[productCode];
+  }
+
+  setAddedToBasketStatus(productCode: string, status: boolean) {
+    if (!this.isAddedToBasketSources[productCode]) {
+      this.isAddedToBasketSources[productCode] = new BehaviorSubject<boolean>(false);
+    }
+    this.isAddedToBasketSources[productCode].next(status);
   }
 
   private mapProductToBasketItem(product: GeneralizedProduct | Product): BasketItem {
