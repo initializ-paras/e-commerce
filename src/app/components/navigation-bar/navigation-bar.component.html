@@ -103,29 +103,29 @@
         d="M5 6H8M5.5 13H16.0218C16.9812 13 17.4609 13 17.8366 12.7523C18.2123 12.5045 18.4013 12.0636 18.7792 11.1818L19.2078 10.1818C20.0173 8.29294 20.4221 7.34853 19.9775 6.67426C19.5328 6 18.5054 6 16.4504 6H12"
         stroke="#262626" stroke-width="0.6" stroke-linecap="round"></path>
     </svg>
-    <div *ngIf="(basketService.basketSource | async) && basketService.getBasketCount(basketService.getBasketValue()?.items).length == 2"
+    <div *ngIf="(basketService.basketSource | async) && basketService.getBasketBadgeCount(basketService.getBasketValue()?.items).length == 2"
       class="absolute inline-flex items-center justify-center w-6 h-6 font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -right-2">
       <span class="absolute top-0.5 right-[0.5em] sm:right-[0.26em] sm:top-0 text-[0.6em] sm:text-[0.75em]">
-        {{ basketService.getBasketCount(basketService.getBasketValue()?.items) }}
+        {{ basketService.getBasketBadgeCount(basketService.getBasketValue()?.items) }}
       </span>
     </div>
     <div *ngIf="(basketService.basketSource | async)
-      && basketService.getBasketCount(basketService.getBasketValue()?.items) !== '0'
-      && basketService.getBasketCount(basketService.getBasketValue()?.items) !== '6'
-      && basketService.getBasketCount(basketService.getBasketValue()?.items) !== '8'
-      && basketService.getBasketCount(basketService.getBasketValue()?.items).length !== 2"
+      && basketService.getBasketBadgeCount(basketService.getBasketValue()?.items) !== '0'
+      && basketService.getBasketBadgeCount(basketService.getBasketValue()?.items) !== '6'
+      && basketService.getBasketBadgeCount(basketService.getBasketValue()?.items) !== '8'
+      && basketService.getBasketBadgeCount(basketService.getBasketValue()?.items).length !== 2"
          class="absolute inline-flex items-center justify-center w-6 h-6 font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -right-2">
       <span class="inline-flex items-center justify-center text-[0.8em] mb-[0.15rem]">
-        {{ basketService.getBasketCount(basketService.getBasketValue()?.items) }}
+        {{ basketService.getBasketBadgeCount(basketService.getBasketValue()?.items) }}
       </span>
     </div>
     <div *ngIf="(basketService.basketSource | async)
-      && (basketService.getBasketCount(basketService.getBasketValue()?.items) == '6'
-      || basketService.getBasketCount(basketService.getBasketValue()?.items) == '8')
-      && basketService.getBasketCount(basketService.getBasketValue()?.items).length !== 2"
+      && (basketService.getBasketBadgeCount(basketService.getBasketValue()?.items) == '6'
+      || basketService.getBasketBadgeCount(basketService.getBasketValue()?.items) == '8')
+      && basketService.getBasketBadgeCount(basketService.getBasketValue()?.items).length !== 2"
          class="absolute inline-flex items-center justify-center w-6 h-6 font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -right-2">
       <span class="inline-flex items-center justify-center text-[0.8em]">
-        {{ basketService.getBasketCount(basketService.getBasketValue()?.items) }}
+        {{ basketService.getBasketBadgeCount(basketService.getBasketValue()?.items) }}
       </span>
     </div>
   </button>
