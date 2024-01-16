@@ -4,7 +4,6 @@ import {BehaviorSubject} from "rxjs";
 import {ProductList} from "../common/models/product-list";
 import {BasketItem} from "../common/models/basket-item";
 import {HttpClient} from "@angular/common/http";
-import {Guid} from "guid-typescript";
 import {GeneralizedProduct} from "../../../modules/shared/models/generalized-product";
 import {Product} from "../../../modules/shared/models/product";
 
@@ -37,7 +36,7 @@ export class BasketService {
     return this.basketSource.value;
   }
 
-  getBasketCount(items: BasketItem[] | undefined): string {
+  getBasketBadgeCount(items: BasketItem[] | undefined): string {
     if (!items) return '0';
 
     let result: number = items.reduce((totalItemsQuantity, item) =>
@@ -46,6 +45,13 @@ export class BasketService {
     if (result > 9) return '9+';
 
     return result.toString();
+  }
+
+  getItemsCount(items: BasketItem[] | undefined): number {
+    if (!items) return 0;
+
+    return items.reduce((totalItemsQuantity, item) =>
+      totalItemsQuantity + item.quantity, 0);
   }
 
   addItemToBasket(item: GeneralizedProduct | Product, quantity = 1) {
