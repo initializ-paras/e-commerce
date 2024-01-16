@@ -39,10 +39,19 @@ export class BasketCardComponent {
   }
 
   removeItemFromBasket() {
-    let updatedBasket = this.basketService.getBasketValue()!;
+    let updatedBasket = this.basketService.getBasketValue();
 
-    updatedBasket!.items = updatedBasket!.items.filter(obj => obj.productCode != this.item.productCode);
+    updatedBasket!.items = updatedBasket!.items.filter(
+      obj => obj.productCode != this.item.productCode);
 
-    this.basketService.setBasket(updatedBasket)
+    this.basketService.setAddedToBasketStatus(this.item.productCode, false);
+
+    if (updatedBasket && updatedBasket.items.length == 0) {
+      this.basketService.deleteBasket(updatedBasket.id);
+      this.navBarService.toggleFeature(this.navBarService.isBasketOpenSubject);
+    }
+    else if (updatedBasket && updatedBasket.items.length !== 0) {
+      this.basketService.setBasket(updatedBasket);
+    }
   }
 }
