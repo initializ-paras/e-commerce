@@ -1,9 +1,109 @@
-<div [@fadeInOutBg]="isBasketOpen ? 'open' : 'closed'" *ngIf="isBasketOpen"
-     class="z-50 fixed overflow-y-hidden w-full h-[100vh]  flex justify-center items-center">
+<div [@fadeInOutBg]="isBasketOpen ? 'open' : 'closed'" *ngIf="isBasketOpen" draggable="false"
+     class="z-50 fixed overflow-hidden w-full h-[100vh] select-none flex justify-center items-center">
   <div class="bg-black opacity-50 h-full w-full z-50 top-0 left-0 fixed" (click)="toggleBasket()"></div>
   <div [@fadeInOutWindow]="isBasketOpen ? 'open' : 'closed'" *ngIf="isBasketOpen"
-       class="h-[90%] w-[85%] bg-white rounded-xl z-50 overflow-y-auto p-2 fixed ">
-
+       class="w-[95%] h-fit lg:w-[45%] bg-white rounded-xl z-50 overflow-y-auto p-2 fixed max-h-[98vh]">
+    <div>
+      <div class="mt-1 mb-2 flex flex-row justify-between items-center px-2">
+        <div>
+          <h2 class="text-2xl font-bold">Basket</h2>
+        </div>
+        <button (click)="toggleBasket()" class="transition hover:scale-125 ease-out duration:500">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6">
+            <path d="M19 5L5 19M5 5L9.5 9.5M12 12L19 19" stroke-width="0.6" stroke="#000000"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="flex flex-row justify-center my-2">
+        <div class="border-t w-full mx-1"></div>
+      </div>
+    </div>
+    <div *ngIf="this.basketService.getItemsCount(this.basketService.getBasketValue()?.items) == 0" class="my-2">
+      <div class="flex flex-col justify-center items-center text-center whitespace-normal max-w-[30rem] sm:max-w-[35rem] md:max-w-[40rem]
+   lg:max-w-[62rem] xl:max-w-[78rem] min-[1361px]:max-w-[82rem] mx-auto px-3 break-words mt-2 select-none" draggable="false">
+        <div class="font-bold text-3xl lg:text-4xl max-w-full overflow-hidden my-2">
+          The basket is empty!
+        </div>
+        <div class="font-bold text-lg lg:text-xl max-w-full overflow-hidden my-2">
+          It seems that you haven't chosen anything yet! Perhaps our catalog can offer something special for you!
+        </div>
+        <button routerLink="/catalog" (click)="toggleBasket()"
+                class="mt-3 w-fit px-3 rounded-xl select-none py-[0.11em] bg-neutral-300 hover:bg-neutral-800
+     ease-out duration-300 transition text-neutral-800 hover:text-neutral-200 text-sm sm:text-base">
+          <span class="m-2">Explore the catalog</span>
+        </button>
+      </div>
+    </div>
+    <div *ngIf="this.basketService.getItemsCount(this.basketService.getBasketValue()?.items) > 0"
+         class="max-h-[72vh] h-[72vh] overflow-y-auto">
+      <app-basket-card *ngFor="let item of this.basketService.getBasketValue()?.items" [item]="item"></app-basket-card>
+    </div>
+    <div *ngIf="this.basketService.getItemsCount(this.basketService.getBasketValue()?.items) > 0">
+      <div class="flex flex-row justify-center mb-2 mt-3">
+        <div class="border-t w-full mx-1"></div>
+      </div>
+      <div style="font-family: 'Open Sans', sans-serif;" class="flex flex-row justify-between items-end mx-1 my-1.5">
+        <div class="flex flex-col justify-between mx-1">
+          <div class="flex flex-row items-center my-0.5">
+            <svg fill="#000000" class="h-5 w-5 mr-1" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M53,3H11A4,4,0,0,0,7,7V25a4,4,0,0,0,2,3.44V55a6,6,0,0,0,6,6H49a6,6,0,0,0,6-6V28.44A4,4,0,0,0,57,25V7A4,4,0,0,0,53,3Zm0,52a4,4,0,0,1-4,4H15a4,4,0,0,1-4-4V29H53Zm2-30a2,2,0,0,1-2,2H11a2,2,0,0,1-2-2V7a2,2,0,0,1,2-2H53a2,2,0,0,1,2,2Z"></path>
+              <path d="M11,25H53V7H11ZM13,9H51V23H13Z"></path>
+              <path d="M21,31H13v8h8Zm-2,6H15V33h4Z"></path>
+              <path d="M31,31H23v8h8Zm-2,6H25V33h4Z"></path>
+              <path d="M41,31H33v8h8Zm-2,6H35V33h4Z"></path>
+              <path d="M51,31H43v8h8Zm-2,6H45V33h4Z"></path>
+              <path d="M21,41H13v8h8Zm-2,6H15V43h4Z"></path>
+              <path d="M51,51H13v6H51Zm-2,4H15V53H49Z"></path>
+              <path d="M31,41H23v8h8Zm-2,6H25V43h4Z"></path>
+              <path d="M41,41H33v8h8Zm-2,6H35V43h4Z"></path>
+              <path d="M51,41H43v8h8Zm-2,6H45V43h4Z"></path>
+              <rect height="2" width="8" x="42" y="19"></rect>
+              <rect height="2" width="4" x="36" y="19"></rect>
+            </svg>
+            <div>
+              Total items quantity: {{basketService.getItemsCount (this.basketService.getBasketValue ()?.items)}}
+            </div>
+          </div>
+          <div class="flex flex-row items-center mb-3">
+            <svg viewBox="0 0 32 32" id="svg5" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                 xmlns:svg="http://www.w3.org/2000/svg" fill="#000000" class="mr-1 h-5 w-5">
+              <g transform="translate(-348,-484)">
+                <path d="m 355,508.01367 a 1,1 0 0 0 -1,1 1,1 0 0 0 1,1 h 6 a 1,1 0 0 0 1,-1 1,1 0 0 0 -1,-1 z"
+                      id="path453757"
+                      style="color: #000000; fill: #000000; fill-rule: evenodd; stroke-linecap: round; stroke-linejoin: round; stroke-miterlimit: 4.1; -inkscape-stroke: none;"></path>
+                <path
+                  d="m 354,486.01367 a 1.0001,1.0001 0 0 0 -0.89453,0.55469 l -3,6.03516 a 1.0001,1.0001 0 0 0 -0.0996,0.42187 1.0001,1.0001 0 0 0 -0.006,0.0234 v 19.96484 a 1.0001,1.0001 0 0 0 1,1 h 26 a 1.0001,1.0001 0 0 0 1,-1 v -19.96484 a 1.0001,1.0001 0 0 0 0,-0.002 1.0001,1.0001 0 0 0 -0.10547,-0.44336 l -3,-6.03516 A 1.0001,1.0001 0 0 0 374,486.01367 Z m 0.61719,2 h 6.20898 l -0.65429,4.03516 h -7.5586 z m 8.23242,0 h 4.30273 l 0.67383,4.03516 h -5.6289 z m 6.33008,0 h 4.20117 l 2.00586,4.03516 h -5.5332 z M 352,494.04883 h 8 v 9.96484 a 1.0001,1.0001 0 0 0 1.70703,0.70703 L 365,501.42773 l 3.29297,3.29297 A 1.0001,1.0001 0 0 0 370,504.01367 v -9.96484 h 6 v 17.96484 h -24 z m 10,0 h 6 v 7.55078 l -2.29297,-2.29297 a 1.0001,1.0001 0 0 0 -1.41406,0 L 362,501.59961 Z"
+                  id="path453703"
+                  style="color: #000000; fill: #000000; fill-rule: evenodd; stroke-linecap: round; stroke-linejoin: round; stroke-miterlimit: 4.1; -inkscape-stroke: none;"></path>
+              </g>
+            </svg>
+            <div>
+              Shipping: Free
+            </div>
+          </div>
+          <div class="flex flex-row items-center mx-1">
+            <svg class="h-6 w-6 -ml-1.5 mr-0.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 17V17.5V18" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+              <path d="M12 6V6.5V7" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+              <path
+                d="M15 9.5C15 8.11929 13.6569 7 12 7C10.3431 7 9 8.11929 9 9.5C9 10.8807 10.3431 12 12 12C13.6569 12 15 13.1193 15 14.5C15 15.8807 13.6569 17 12 17C10.3431 17 9 15.8807 9 14.5"
+                stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+              <path
+                d="M7 3.33782C8.47087 2.48697 10.1786 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 10.1786 2.48697 8.47087 3.33782 7"
+                stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path>
+            </svg>
+            <span class="text-sm min-[550px]:text-lg font-bold">Total: USD 9999990.00</span>
+          </div>
+        </div>
+        <div class="flex flex-row basis-1/3">
+          <button
+            class="rounded-xl select-none py-[0.11em] bg-neutral-300 hover:bg-emerald-300 ease-out duration-300
+          transition text-neutral-800 hover:text-white text-sm sm:text-lg hover:font-bold w-full">
+            <span class="m-2">Purchase</span>
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
-

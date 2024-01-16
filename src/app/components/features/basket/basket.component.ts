@@ -1,6 +1,8 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {basketModalBackgroundAnimation, basketModalWindowAnimation} from "./basket.animations";
 import {NavigationBarService} from "../../navigation-bar/common/services/navigation-bar.service";
+import {BasketService} from "./basket.service";
+import {ProductCategoryMultiplierService} from "../../../modules/shared/services/product-category-multiplier-service";
 
 @Component({
   selector: 'app-basket',
@@ -11,7 +13,8 @@ import {NavigationBarService} from "../../navigation-bar/common/services/navigat
 export class BasketComponent implements OnInit {
   isBasketOpen: boolean = false;
 
-  constructor(private navigationBarService: NavigationBarService) {
+  constructor(private navigationBarService: NavigationBarService, public basketService: BasketService,
+              public productCategoryMultiplierService: ProductCategoryMultiplierService ) {
   }
 
   ngOnInit(): void {
