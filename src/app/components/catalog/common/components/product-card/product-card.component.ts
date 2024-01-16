@@ -13,21 +13,23 @@ import {
 
 export class ProductCardComponent implements OnInit {
   @Input() product!: GeneralizedProduct;
-  isAddedToBasket$ = new BehaviorSubject<boolean>(false);
+  isAddedToBasket$!: BehaviorSubject<boolean>;
 
   constructor(private basketService: BasketService,
               public productCategoryMultiplierService: ProductCategoryMultiplierService) {
   }
 
   ngOnInit(): void {
+    this.isAddedToBasket$ = this.basketService.isAddedToBasket$(this.product.productCode);
+
     if (this.basketService.getBasketValue()?.items.find
     (i => i.productCode == this.product.productCode)) {
-      this.isAddedToBasket$.next(true);
+      this.basketService.setAddedToBasketStatus(this.product.productCode, true);
     }
   }
 
   addToBasket() {
     this.basketService.addItemToBasket(this.product);
-    this.isAddedToBasket$.next(true);
+    this.basketService.setAddedToBasketStatus(this.product.productCode, true);
   }
 }
