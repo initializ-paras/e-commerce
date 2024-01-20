@@ -6,8 +6,8 @@ import {ErrorComponent} from "./components/error/error.component";
 const routes: Routes = [
   { path: '', component: HomeComponent, data: { breadcrumb: { label: 'Home' } } },
   { path: 'catalog', loadChildren: () => import('./components/catalog/catalog.module').then(m => m.CatalogModule) },
-  { path: 'error', component: ErrorComponent },
-  { path: '**', redirectTo: 'error', pathMatch: 'full' }
+  { path: 'account', loadChildren: () => import('../app/modules/account/account.module').then(m => m.AccountModule) },
+  { path: '**', pathMatch: 'full', component: ErrorComponent}
 ];
 
 @NgModule({
