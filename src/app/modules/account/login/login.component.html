@@ -1,22 +1,16 @@
 <main class="min-h-[85vh] flex flex-row justify-center items-center mx-auto accent-neutral-800">
   <div class="max-sm:w-[90vw] w-[30rem] rounded-xl bg-white border p-2.5">
     <div class="flex flex-row justify-start w-full mb-4 select-none" draggable="false">
-      <h1 class="font-bold text-3xl p-1.5">Login</h1>
+      <h1 class="font-bold text-3xl p-1.5">Log in</h1>
     </div>
-    <form class="p-1.5">
+    <form class="p-1.5" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <div class="mb-3">
         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 select-none" draggable="false">Your email</label>
-        <input type="email" id="email" class="bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="example@email.com" required>
+        <input formControlName="email" type="email" id="email" class="bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="example@email.com" required>
       </div>
       <div class="mb-3">
         <label for="password" class="block mb-2 text-sm font-medium text-gray-900 select-none" draggable="false">Your password</label>
-        <input type="password" id="password" class="bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
-      </div>
-      <div class="flex items-start mb-3">
-        <div class="flex items-center h-5">
-          <input id="remember" type="checkbox" value="" class="w-4 h-4 border border-gray-500 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300" required>
-        </div>
-        <label for="remember" class="ms-2 text-sm font-medium text-gray-900 select-none" draggable="false">Remember me</label>
+        <input formControlName="password" type="password" id="password" class="bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
       </div>
       <button type="submit" class="rounded-xl select-none py-2 px-4 bg-neutral-300 hover:bg-neutral-800 ease-out duration-300
           transition text-neutral-800 hover:text-neutral-200 text-sm sm:text-base">
