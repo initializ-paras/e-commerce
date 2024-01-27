@@ -13,7 +13,6 @@ export class AccountService {
   baseUrl = environment.apiUrl;
   private currentUserSource: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
   currentUserSource$ = this.currentUserSource.asObservable();
-  private authStatusSource: BehaviorSubject<AuthStatus | null> = new BehaviorSubject<AuthStatus | null>(null);
 
   constructor(private http: HttpClient, private router: Router) {
   }
@@ -31,7 +30,6 @@ export class AccountService {
 
   logout() {
     this.currentUserSource.next(null);
-    this.router.navigateByUrl('/');
     return this.removeAuthCredentials().subscribe();
   }
 
@@ -57,10 +55,6 @@ export class AccountService {
       );
   }
 
-  getCurrentUserValue() {
-    return this.currentUserSource.value;
-  }
-
   getAuthStatus() {
     return this.http.get<AuthStatus>(this.baseUrl + "user/authstatus", { withCredentials: true });
   }
@@ -73,5 +67,29 @@ export class AccountService {
   private removeAuthCredentials() {
     return this.http.post<string>(this.baseUrl + "user/logout", null,
       { responseType: 'json', withCredentials: true });
+  }
+
+  tryAuthenticate() {
+    this.getAuthStatus().subscribe(authStatus => {
+      if (!authStatus?.containsAccessToken && authStatus?.containsRefreshToken) {
+        this.refreshAccessToken().subscribe(
+          () => {
+            this.getAuthStatus().subscribe(
+              updatedAuthStatus => {
+                if (updatedAuthStatus.containsAccessToken && updatedAuthStatus.containsRefreshToken) {
+                  this.loadCurrentUser().subscribe();
+                }
+              });
+          });
+      }
+      else if (authStatus.containsAccessToken && authStatus.containsRefreshToken
+        && this.currentUserSource.value == null) {
+        this.loadCurrentUser().subscribe();
+      }
+      else if (authStatus.containsAccessToken && authStatus.containsRefreshToken
+        && this.currentUserSource.value !== null) {
+        return;
+      }
+    });
   }
 }
