@@ -6,6 +6,8 @@ import {BasketItem} from "../common/models/basket-item";
 import {HttpClient} from "@angular/common/http";
 import {GeneralizedProduct} from "../../../modules/shared/models/generalized-product";
 import {Product} from "../../../modules/shared/models/product";
+import {AccountService} from "../../../modules/account/account.service";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +18,7 @@ export class BasketService {
     new BehaviorSubject<ProductList<BasketItem> | null>(null);
   private isAddedToBasketSources: Record<string, BehaviorSubject<boolean>> = {};
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   getBasket(id: string) {
     return this.http.get<ProductList<BasketItem>>(this.baseUrl + "basket/?listid=" + id)
@@ -26,7 +28,8 @@ export class BasketService {
   }
 
   setBasket(basket: ProductList<BasketItem>) {
-    return this.http.post<ProductList<BasketItem>>(this.baseUrl + "basket/createorupdate", basket)
+    return this.http.post<ProductList<BasketItem>>(
+      this.baseUrl + "basket/createorupdate", basket, { withCredentials: true })
       .subscribe({
         next: basket => this.basketSource.next(basket)
       });
@@ -71,6 +74,7 @@ export class BasketService {
   addItemToBasket(item: GeneralizedProduct | Product, quantity = 1) {
     const addedItem = this.mapProductToBasketItem(item);
     const basket = this.getBasketValue() ?? this.createNewBasket();
+
     basket.items = this.addOrUpdateItem(basket.items, addedItem, quantity);
     this.setBasket(basket);
   }
@@ -97,6 +101,12 @@ export class BasketService {
     return Number(total.toFixed(2));
   }
 
+  synchronizeBasketWithUser() {
+    return this.http.put<any>(
+      this.baseUrl + "basket/SynchronizeList?listId=" + this.basketSource.value?.id! + "&listType=BASKET",
+      null, { withCredentials: true })
+  }
+
   private mapProductToBasketItem(product: GeneralizedProduct | Product): BasketItem {
     return {
       name: product.name,
@@ -110,7 +120,19 @@ export class BasketService {
 
   private createNewBasket(): ProductList<BasketItem> {
     const basket = new ProductList<BasketItem>();
+
+    let accountService = new AccountService(this.http, this.router);
+
+    accountService.currentUserSource$.subscribe({
+      next: user => {
+        if (user) {
+          basket.id = user!.basketId;
+        }
+      }
+    });
+
     localStorage.setItem('basketId', basket.id);
+
     return basket;
   }
 
