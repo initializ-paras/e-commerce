@@ -18,7 +18,7 @@
         <div class="border-t w-full mx-1"></div>
       </div>
     </div>
-    <div *ngIf="this.basketService.getItemsCount(this.basketService.getBasketValue()?.items) == 0" class="my-2">
+    <div *ngIf="(basketService.basketSource | async) === null" class="my-2">
       <div class="flex flex-col justify-center items-center text-center whitespace-normal max-w-[30rem] sm:max-w-[35rem] md:max-w-[40rem]
    lg:max-w-[62rem] xl:max-w-[78rem] min-[1361px]:max-w-[82rem] mx-auto px-3 break-words mt-2 select-none" draggable="false">
         <div class="font-bold text-3xl lg:text-4xl max-w-full overflow-hidden my-2">
@@ -34,11 +34,11 @@
         </button>
       </div>
     </div>
-    <div *ngIf="this.basketService.getItemsCount(this.basketService.getBasketValue()?.items) > 0"
+    <div *ngIf="basketService.basketSource | async"
          class="max-h-[72vh] h-[72vh] overflow-y-auto">
       <app-basket-card *ngFor="let item of this.basketService.getBasketValue()?.items" [item]="item"></app-basket-card>
     </div>
-    <div *ngIf="this.basketService.getItemsCount(this.basketService.getBasketValue()?.items) > 0">
+    <div *ngIf="basketService.basketSource | async">
       <div class="flex flex-row justify-center mb-2 mt-3">
         <div class="border-t w-full mx-1"></div>
       </div>
