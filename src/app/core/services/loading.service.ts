@@ -13,7 +13,7 @@ export class LoadingService {
     document.body.classList.replace('overflow-y-auto', 'overflow-y-hidden');
     this.requestCount++;
     this.spinnerService.show(undefined, {
-      bdColor: "rgba(255,255,255, 0.9)",
+      bdColor: "rgba(255,255,255, 1)",
       size: "default",
       color: "#111111",
       type: "ball-clip-rotate",
