@@ -64,13 +64,6 @@ export class CatalogComponent implements OnInit {
             '@productCategory', { label: this.category.charAt(0).toUpperCase()
                 + this.category.slice(1).replaceAll('_', ' ') });
           this.searchedText = this.searchService.searchedText;
-        },
-        error: err => {
-          if (err.status === 404) {
-            this.router.navigate(['/error']);
-          } else {
-            console.log(err);
-          }
         }
       });
     });
