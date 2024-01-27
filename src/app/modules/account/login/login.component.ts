@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AccountService} from "../account.service";
+import {Router} from "@angular/router";
+import {BasketService} from "../../../components/features/basket/basket.service";
 
 @Component({
   selector: 'app-login',
@@ -12,12 +14,42 @@ export class LoginComponent {
     password: new FormControl("", Validators.required)
   });
 
-  constructor(private accountService: AccountService) {
+  constructor(private accountService: AccountService, private router: Router,
+              private basketService: BasketService) {
+    this.accountService.currentUserSource$.subscribe(
+      {
+        next: user => {
+          if (user !== null) {
+            this.router.navigateByUrl('/');
+          }
+        }
+      });
   }
 
   onSubmit() {
     this.accountService.login(this.loginForm.value).subscribe({
-      next: user => console.log(user)
+      next: user =>{
+        this.synchronizeUserBasket();
+
+        this.basketService.getBasket(localStorage.getItem('basketId')!);
+
+        this.router.navigateByUrl('/');
+      }
     })
+  }
+
+  private synchronizeUserBasket() {
+    this.accountService.currentUserSource$.subscribe({
+      next: user => {
+        if (user) {
+          if (user.basketId !== null) {
+            localStorage.setItem('basketId', user.basketId)
+          }
+          else if (localStorage.getItem('basketId') !== null && user.basketId == null) {
+            this.basketService.synchronizeBasketWithUser().subscribe();
+          }
+        }
+      }
+    });
   }
 }
