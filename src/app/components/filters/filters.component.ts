@@ -15,7 +15,6 @@ export class FiltersComponent {
   }
 
   private checkAndClearFilters(category: string): void {
-    console.log(category)
     if (category && category !== this.filtersService.filterCategory) {
       this.filtersService.selectedFilters = [];
       this.filtersService.filterCategory = category;
@@ -37,8 +36,7 @@ export class FiltersComponent {
         this.filtersService.totalItemsQuantity = value.totalItemsQuantity;
         this.filtersService.currentPageItemsQuantity = value.currentPageItemsQuantity;
         this.filtersService.pageIndex = value.pageIndex;
-      },
-      error: err => console.log(err)
+      }
     });
   }
 

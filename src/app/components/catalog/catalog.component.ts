@@ -37,10 +37,9 @@ export class CatalogComponent implements OnInit {
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
+
     this.updateCatalog();
     this.updateFilters();
-
-    console.log(this.category)
 
     if (this.category !== 'search_results') {
       this.searchedText = '';
@@ -91,25 +90,33 @@ export class CatalogComponent implements OnInit {
   removeAllFilters(): void {
     this.filterService.clearSelectedFilters();
     this.updateCatalog();
+
     let filters : FiltersComponent = new FiltersComponent(this.filterService, this.route);
     filters.updateFilters(this.filterService.categoryMapping[this.category]);
+
     let sortingFilters : SortDropdownComponent = new SortDropdownComponent(this.sortingService, this, this.filterService);
+
     sortingFilters.selectValue("Rating");
+
     const lowerPriceLimitInput = document.getElementById(
       'lowerpricelimit') as HTMLInputElement;
     const upperPriceLimitInput = document.getElementById(
       'upperpricelimit') as HTMLInputElement;
+
     lowerPriceLimitInput.value = '';
     upperPriceLimitInput.value = '';
+
     this.currentPageIndex = 1;
+
     this.updateCatalog();
   }
 
   changePageIndex(event : any): void {
-    if(this.currentPageIndex !== event.page) {
+    if (this.currentPageIndex !== event.page) {
       this.currentPageIndex = event.page;
       this.updateCatalog();
     }
+
     window.scrollTo(0, 0);
   }
 }
