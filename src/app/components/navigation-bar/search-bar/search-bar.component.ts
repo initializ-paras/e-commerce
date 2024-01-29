@@ -27,7 +27,6 @@ export class SearchBarComponent {
     }
 
     this.searchService.searchedText = this.searchText;
-    console.log('Searched text:', this.searchService.searchedText);
     this.searchText = '';
     this.showClearButton = false;
 

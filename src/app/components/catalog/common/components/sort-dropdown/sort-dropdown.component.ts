@@ -41,7 +41,6 @@ export class SortDropdownComponent {
 
   openDropdown(): void {
     this.isOpen = !this.isOpen;
-    console.log(this.isOpen)
   }
 
   selectValue(option : string) {

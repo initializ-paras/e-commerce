@@ -83,7 +83,6 @@ export class PriceRangeAccordionComponent {
   }
 
   checkPriceRangeValidity(lowerValue: number, upperValue: number): void {
-    console.log(lowerValue + '-' + upperValue)
     if (
       lowerValue < this.minValue ||
       lowerValue > upperValue ||
