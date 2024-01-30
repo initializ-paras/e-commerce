@@ -5,6 +5,7 @@ import {User} from "../shared/models/user";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {AuthStatus} from "../shared/models/auth-status";
+import {ApiResponse} from "../shared/models/api-response";
 
 @Injectable({
   providedIn: 'root'
@@ -17,12 +18,15 @@ export class AccountService {
   constructor(private http: HttpClient, private router: Router) {
   }
 
+  checkLoginCredentials(loginData: any) {
+    return this.http.post<ApiResponse>(this.baseUrl + 'user/CheckLoginCredentials', loginData);
+  }
+
   login(loginData: any) {
-    return this.http.post<User>(this.baseUrl + "user/login", loginData, { withCredentials: true })
+    return this.http.post<User>(this.baseUrl + "user/login", loginData)
       .pipe(
         map(user => {
           this.currentUserSource.next(user);
-          this.router.navigateByUrl('/');
           return;
         })
     );
