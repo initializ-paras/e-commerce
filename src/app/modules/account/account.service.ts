@@ -19,11 +19,11 @@ export class AccountService {
   }
 
   checkLoginCredentials(loginData: any) {
-    return this.http.post<ApiResponse>(this.baseUrl + 'user/CheckLoginCredentials', loginData);
+    return this.http.post<ApiResponse>(this.baseUrl + 'User/CheckLoginCredentials', loginData);
   }
 
   login(loginData: any) {
-    return this.http.post<User>(this.baseUrl + "user/login", loginData)
+    return this.http.post<User>(this.baseUrl + "User/Login", loginData, { withCredentials: true })
       .pipe(
         map(user => {
           this.currentUserSource.next(user);
@@ -38,20 +38,20 @@ export class AccountService {
   }
 
   register(registrationData: any) {
-    return this.http.post<User>(this.baseUrl + "user/register", registrationData);
+    return this.http.post<User>(this.baseUrl + "User/Register", registrationData);
   }
 
   verifyEmail(verificationToken: string, email: string) {
     return this.http.put<User>(
-      this.baseUrl + "user/verifyemail?verificationtoken=" + verificationToken + "&email=" + email, null);
+      this.baseUrl + "User/VerifyEmail?verificationtoken=" + verificationToken + "&email=" + email, null);
   }
 
   isExistingEmail(email: string) {
-    return this.http.get<boolean>(this.baseUrl + "user/emailstatus?email=" + email);
+    return this.http.get<boolean>(this.baseUrl + "User/EmailStatus?email=" + email);
   }
 
   loadCurrentUser() {
-    return this.http.get<User>(this.baseUrl + "user/currentuser", { withCredentials: true })
+    return this.http.get<User>(this.baseUrl + "User/CurrentUser", { withCredentials: true })
       .pipe(
         map(user =>
           this.currentUserSource.next(user)
@@ -60,16 +60,16 @@ export class AccountService {
   }
 
   getAuthStatus() {
-    return this.http.get<AuthStatus>(this.baseUrl + "user/authstatus", { withCredentials: true });
+    return this.http.get<AuthStatus>(this.baseUrl + "User/AuthStatus", { withCredentials: true });
   }
 
   refreshAccessToken(): Observable<string> {
-    return this.http.put<string>(this.baseUrl + "user/RefreshAccessToken", null,
+    return this.http.put<string>(this.baseUrl + "User/RefreshAccessToken", null,
       { responseType: 'json', withCredentials: true });
   }
 
   private removeAuthCredentials() {
-    return this.http.post<string>(this.baseUrl + "user/logout", null,
+    return this.http.post<string>(this.baseUrl + "User/Logout", null,
       { responseType: 'json', withCredentials: true });
   }
 
