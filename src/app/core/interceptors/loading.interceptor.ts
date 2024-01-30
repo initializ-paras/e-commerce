@@ -26,7 +26,10 @@ export class LoadingInterceptor implements HttpInterceptor {
               finalize(() => this.loadingService.terminate())
             ).subscribe();
           }
-        }
+        },
+        (error) => {
+          this.loadingService.terminate();
+        },
       ),
     );
   }
