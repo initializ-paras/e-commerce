@@ -36,7 +36,7 @@ export class FiltersService {
     let gatheredAttributes: string[] = [query, preparedText];
 
     return this.http.get<FiltersData>(
-      this.baseApiUrl + 'specificationfilter/' + category + '?' + gatheredAttributes.join('&'))
+      this.baseApiUrl + 'SpecificationFilter/' + category + '?' + gatheredAttributes.join('&'))
   }
 
   getFilterOnlyArray() : string[] {
