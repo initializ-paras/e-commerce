@@ -21,7 +21,7 @@ export class BasketService {
   constructor(private http: HttpClient, private router: Router) { }
 
   getBasket(id: string) {
-    return this.http.get<ProductList<BasketItem>>(this.baseUrl + "basket/?listid=" + id)
+    return this.http.get<ProductList<BasketItem>>(this.baseUrl + "Basket/?listid=" + id)
       .subscribe({
       next: basket => this.basketSource.next(basket)
     });
@@ -29,14 +29,14 @@ export class BasketService {
 
   setBasket(basket: ProductList<BasketItem>) {
     return this.http.post<ProductList<BasketItem>>(
-      this.baseUrl + "basket/createorupdate", basket, { withCredentials: true })
+      this.baseUrl + "Basket/CreateOrUpdate", basket, { withCredentials: true })
       .subscribe({
         next: basket => this.basketSource.next(basket)
       });
   }
 
   deleteBasket(id: string) {
-    return this.http.delete(this.baseUrl + "basket/delete?listid=" + id,
+    return this.http.delete(this.baseUrl + "Basket/Delete?listid=" + id,
       { responseType: 'text' })
       .subscribe({
         next: () => {
@@ -103,7 +103,7 @@ export class BasketService {
 
   synchronizeBasketWithUser() {
     return this.http.put<any>(
-      this.baseUrl + "basket/SynchronizeList?listId=" + this.basketSource.value?.id! + "&listType=BASKET",
+      this.baseUrl + "Basket/SynchronizeList?listId=" + this.basketSource.value?.id! + "&listType=BASKET",
       null, { withCredentials: true })
   }
 
