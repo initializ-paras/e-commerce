@@ -1,18 +1,22 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AccountService} from "../account.service";
 import {Router} from "@angular/router";
 import {BasketService} from "../../../components/features/basket/basket.service";
+import {BehaviorSubject} from "rxjs";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html'
 })
 export class LoginComponent {
-  loginForm: FormGroup = new FormGroup({
-    email: new FormControl("", Validators.required),
-    password: new FormControl("", Validators.required)
-  });
+  loginForm = new FormGroup({
+    email: new FormControl('', [Validators.required,
+      Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{1,}$')]),
+    password: new FormControl('', Validators.required)
+  })
+
+  responseMessage: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
 
   constructor(private accountService: AccountService, private router: Router,
               private basketService: BasketService) {
@@ -27,15 +31,26 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    this.accountService.login(this.loginForm.value).subscribe({
-      next: user =>{
-        this.synchronizeUserBasket();
+    this.accountService.checkLoginCredentials(this.loginForm.value)
+        .subscribe({
+            next: response => {
+              if (response.responseCode !== 200) {
+                this.responseMessage.next(response.responseMessage);
+                return;
+              }
 
-        this.basketService.getBasket(localStorage.getItem('basketId')!);
+              this.responseMessage.next(null);
 
-        this.router.navigateByUrl('/');
-      }
-    })
+              this.accountService.login(this.loginForm.value)
+                  .subscribe({
+                        next: user => {
+                          this.synchronizeUserBasket();
+                          this.basketService.getBasket(localStorage.getItem('basketId')!);
+                          this.router.navigateByUrl('/');
+                        }
+                  });
+            }
+          });
   }
 
   private synchronizeUserBasket() {

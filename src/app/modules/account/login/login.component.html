@@ -4,15 +4,13 @@
       <h1 class="font-bold text-3xl p-1.5">Log in</h1>
     </div>
     <form class="p-1.5" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <div class="mb-3">
-        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 select-none" draggable="false">Your email</label>
-        <input formControlName="email" type="email" id="email" class="bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="example@email.com" required>
-      </div>
-      <div class="mb-3">
-        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 select-none" draggable="false">Your password</label>
-        <input formControlName="password" type="password" id="password" class="bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
-      </div>
-      <button type="submit" class="rounded-xl select-none py-2 px-4 bg-neutral-300 hover:bg-neutral-800 ease-out duration-300
+      <app-text-input [formControl]="loginForm.controls['email']" [label]="'Email'" [type]="'email'" class="my-2"></app-text-input>
+      <app-text-input [formControl]="loginForm.controls['password']" [label]="'Password'" [type]="'password'" class="my-2"></app-text-input>
+      <div *ngIf="responseMessage | async" class="mt-2 mb-3 mx-1 text-sm text-red-600 font-bold select-none" draggable="false">{{responseMessage.value}}</div>
+      <button *ngIf="loginForm.invalid" [disabled]="loginForm.invalid" type="submit" class="rounded-xl select-none py-2 px-4 bg-neutral-300 text-sm sm:text-base">
+        <span class="m-2">Submit</span>
+      </button>
+      <button *ngIf="!loginForm.invalid" type="submit" class="rounded-xl select-none py-2 px-4 bg-neutral-300 hover:bg-neutral-800 ease-out duration-300
           transition text-neutral-800 hover:text-neutral-200 text-sm sm:text-base">
         <span class="m-2">Submit</span>
       </button>
