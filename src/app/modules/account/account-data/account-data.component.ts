@@ -14,14 +14,13 @@ export class AccountDataComponent {
               private router: Router) {
     this.accountService.tryAuthenticate();
 
-    this.accountService.currentUserSource$.subscribe(
-      {
-        next: user => {
-          if (user == null) {
-            this.router.navigateByUrl('/');
-          }
+    this.accountService.currentUserSource$.subscribe({
+      next: user => {
+        if (!user) {
+          this.router.navigateByUrl('/');
         }
-      });
+      }
+    });
   }
 
   logout() {
