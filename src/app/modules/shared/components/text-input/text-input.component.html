@@ -1,6 +1,7 @@
 <div class="mb-3">
-    <label class="block mb-2 text-sm font-medium text-gray-900 select-none" draggable="false">{{label}}</label>
+    <label class="block mb-2 mx-1 text-sm font-medium text-gray-900 select-none" draggable="false">{{label}}</label>
     <input
+        style="font-family: 'Open Sans', sans-serif;"
         type={{type}}
         [formControl]="control"
         [ngClass]="(control.touched) ? control.invalid ? 'focus:ring-red-500' : null : null"
