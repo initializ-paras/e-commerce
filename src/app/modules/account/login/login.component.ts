@@ -31,26 +31,18 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    this.accountService.checkLoginCredentials(this.loginForm.value)
-        .subscribe({
-            next: response => {
-              if (response.responseCode !== 200) {
-                this.responseMessage.next(response.responseMessage);
-                return;
-              }
+    this.accountService.login(this.loginForm.value).subscribe({
+      next: user =>{
+        this.synchronizeUserBasket();
 
-              this.responseMessage.next(null);
+        this.basketService.getBasket(localStorage.getItem('basketId')!);
 
-              this.accountService.login(this.loginForm.value)
-                  .subscribe({
-                        next: user => {
-                          this.synchronizeUserBasket();
-                          this.basketService.getBasket(localStorage.getItem('basketId')!);
-                          this.router.navigateByUrl('/');
-                        }
-                  });
-            }
-          });
+        this.router.navigateByUrl('/');
+      },
+      error: err => {
+        this.responseMessage.next(err.responseMessage);
+      }
+    })
   }
 
   private synchronizeUserBasket() {
