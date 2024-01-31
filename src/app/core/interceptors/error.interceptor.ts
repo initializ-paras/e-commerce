@@ -14,11 +14,15 @@ export class ErrorInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
-      catchError((error: HttpErrorResponse) => {
-        if (error && (error.status === 404)) {
+      catchError((httpErrorResponse: HttpErrorResponse) => {
+        if (httpErrorResponse && (httpErrorResponse.status === 404)) {
           this.router.navigateByUrl('/error');
         }
-        return throwError(() => new Error(error.message));
+        if (httpErrorResponse &&
+          (httpErrorResponse.status === 401 || httpErrorResponse.status === 400)) {
+          throw httpErrorResponse.error;
+        }
+        return throwError(() => new Error(httpErrorResponse.message));
       }));
   }
 }
