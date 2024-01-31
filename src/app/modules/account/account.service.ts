@@ -18,16 +18,11 @@ export class AccountService {
   constructor(private http: HttpClient, private router: Router) {
   }
 
-  checkLoginCredentials(loginData: any) {
-    return this.http.post<ApiResponse>(this.baseUrl + 'User/CheckLoginCredentials', loginData);
-  }
-
   login(loginData: any) {
     return this.http.post<User>(this.baseUrl + "User/Login", loginData, { withCredentials: true })
       .pipe(
         map(user => {
           this.currentUserSource.next(user);
-          return;
         })
     );
   }
@@ -80,7 +75,8 @@ export class AccountService {
           () => {
             this.getAuthStatus().subscribe(
               updatedAuthStatus => {
-                if (updatedAuthStatus.containsAccessToken && updatedAuthStatus.containsRefreshToken) {
+                if (updatedAuthStatus.containsAccessToken && updatedAuthStatus.containsRefreshToken
+                  && this.currentUserSource.value == null) {
                   this.loadCurrentUser().subscribe();
                 }
               });
