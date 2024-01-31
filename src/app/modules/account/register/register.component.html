@@ -1,1 +1,32 @@
-<p>register works!</p>
+<main class="min-h-[85vh] flex flex-row justify-center items-center mx-auto accent-neutral-800">
+  <div class="max-sm:w-[90vw] w-[35rem] rounded-xl bg-white border p-2.5 max-lg:my-4">
+    <div class="flex flex-row justify-start w-full max-sm:mb-4 mb-2 select-none" draggable="false">
+      <h1 class="font-bold text-3xl p-1.5 sm:mx-2">Register</h1>
+    </div>
+    <form class="p-1.5" [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+      <div class="sm:grid sm:grid-cols-2">
+        <app-text-input [formControl]="registrationForm.controls['firstName']" [label]="'First name'" [type]="'text'" class="my-1 sm:my-2 mx-2"></app-text-input>
+        <app-text-input [formControl]="registrationForm.controls['middleName']" [label]="'Middle name'" [type]="'text'" class="my-1 sm:my-2 mx-2"></app-text-input>
+        <app-text-input [formControl]="registrationForm.controls['lastName']" [label]="'Last name'" [type]="'text'" class="my-1 sm:my-2 mx-2"></app-text-input>
+        <app-text-input [formControl]="registrationForm.controls['phoneNumber']" [label]="'Phone number'" [type]="'tel'" class="my-1 sm:my-2 mx-2"></app-text-input>
+        <app-text-input [formControl]="registrationForm.controls['email']" [label]="'Email'" [type]="'email'" class="my-1 sm:my-2 mx-2"></app-text-input>
+        <app-text-input [formControl]="registrationForm.controls['password']" [label]="'Password'" [type]="'password'" class="my-1 sm:my-2 mx-2"></app-text-input>
+      </div>
+      <div style="font-family: 'Open Sans', sans-serif;" *ngIf="responseMessage | async" class="mt-2 mb-3 mx-1 text-sm text-red-600 font-bold select-none sm:mx-2 sm:p-1.5" draggable="false">{{responseMessage.value}}</div>
+      <ul style="font-family: 'Open Sans', sans-serif;" *ngIf="errors | async" draggable="false">
+        <li *ngFor="let error of errors.value" class="mt-2 mb-3 mx-1 text-sm text-red-600 font-bold select-none sm:mx-2 sm:p-1.5">{{error}}</li>
+      </ul>
+      <button *ngIf="registrationForm.invalid" [disabled]="registrationForm.invalid" type="submit"
+              class="rounded-xl select-none py-2 px-4 bg-neutral-300 text-sm sm:text-base sm:m-2">
+        <span class="m-2">Submit</span>
+      </button>
+      <button *ngIf="!registrationForm.invalid" type="submit" class="rounded-xl select-none py-2 px-4 bg-neutral-300 hover:bg-neutral-800 ease-out duration-300
+          transition text-neutral-800 hover:text-neutral-200 text-sm sm:text-base sm:m-2">
+        <span class="m-2">Submit</span>
+      </button>
+    </form>
+    <div class="mx-2 mt-3 duration-200 ease-in-out transition hover:underline sm:p-1.5">
+      <a [routerLink]="['/account/login']" class="text-sm">Log in to an existing account</a>
+    </div>
+  </div>
+</main>
